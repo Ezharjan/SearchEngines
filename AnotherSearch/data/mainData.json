@@ -1,0 +1,1116 @@
+{
+    "info": {
+        "title": "简单搜索",
+        "icon": "",
+        "mainTitle": "简单搜索",
+        "subTitle": "Simple Search",
+        "logo": ""
+    },
+    "engine": [
+        {
+            "name": "谷歌",
+            "value": "google",
+            "href": "https://www.google.com/search?q=",
+            "sugurl": "https://suggestqueries.google.com/complete/search?client=youtube&q=#content#&jsonp=window.google.ac.h",
+            "icon": "./img/engineLogo/google.ico",
+            "show": true,
+            "select": ""
+        },
+        {
+            "name": "必应",
+            "value": "bing",
+            "href": "https://cn.bing.com/search?q=",
+            "sugurl": "https://api.bing.com/qsonhs.aspx?type=cb&q=#content#&cb=window.bing.sug",
+            "icon": "./img/engineLogo/bing.ico",
+            "show": true,
+            "select": "selected"
+        },
+        {
+            "name": "百度",
+            "value": "baidu",
+            "href": "https://www.baidu.com/s?wd=",
+            "sugurl": "https://suggestion.baidu.com/su?wd=#content#&cb=window.baidu.sug",
+            "icon": "./img/engineLogo/baidu.svg",
+            "show": true,
+            "select": ""
+        },
+        {
+            "name": "搜狗",
+            "value": "sougou",
+            "href": "https://www.sogou.com/web?query=",
+            "sugurl": "https://www.sogou.com/suggnew/ajajjson?type=web&key=#content#",
+            "icon": "./img/engineLogo/sougou.ico",
+            "show": true,
+            "select": ""
+        },
+        {
+            "name": "好搜",
+            "value": "好搜",
+            "href": "https://www.so.com/s?ie=utf-8&fr=hao_360so&src=home_hao_360so&q=",
+            "sugurl": "https://sug.so.360.cn/suggest?encodein=utf-8&encodeout=utf-8&format=json&word=#content#&callback=window.so.sug",
+            "icon": "./img/engineLogo/so360.ico",
+            "show": true,
+            "select": ""
+        },
+        {
+            "name": "Magi",
+            "value": "magi",
+            "href": "https://magi.com/search?q=",
+            "sugurl": "https://magi.com/suggest?size=8&q=#content#&callback=window.magi.sug",
+            "icon": "./img/engineLogo/magi.png",
+            "show": true,
+            "select": ""
+        },
+        {
+            "name": "夸克",
+            "value": "quark",
+            "href": "https://quark.sm.cn/s?q=",
+            "sugurl": "https://quark.sm.cn/api/quark_sug?q=#content#&callback=window.quark.sug",
+            "icon": "./img/engineLogo/quark.ico",
+            "show": true,
+            "select": ""
+        }
+    ],
+    "sideBar": {
+        "content": [
+            {
+                "name": "书签",
+                "value": "Website",
+                "icon": "fa fa-tags",
+                "color": "#1B813E",
+                "show": true,
+                "content": [
+                    {
+                        "name": "社交",
+                        "value": "social",
+                        "icon": "fa fa-group",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "新浪微博",
+                                "url": "https://www.weibo.com/",
+                                "icon": "weibo",
+                                "color": "#ff8140",
+                                "show": true
+                            },
+                            {
+                                "name": "百度贴吧",
+                                "url": "https://tieba.baidu.com/",
+                                "icon": "tieba",
+                                "color": "#3385ff",
+                                "show": true
+                            },
+                            {
+                                "name": "简书",
+                                "url": "https://www.jianshu.com/",
+                                "icon": "jianshu",
+                                "color": "#ea6f5a",
+                                "show": true
+                            },
+                            {
+                                "name": "知乎",
+                                "url": "https://www.zhihu.com/",
+                                "icon": "zhihu",
+                                "color": "#0084ff",
+                                "show": true
+                            },
+                            {
+                                "name": "Facebook",
+                                "url": "https://www.facebook.com/",
+                                "icon": "facebook",
+                                "color": "#4267b2",
+                                "show": true
+                            },
+                            {
+                                "name": "Twitter",
+                                "url": "https://twitter.com/",
+                                "icon": "twitter",
+                                "color": "rgb(29, 161, 242)",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "购物",
+                        "value": "shopping",
+                        "icon": "fa fa-shopping-cart",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "淘宝",
+                                "url": "https://www.taobao.com/",
+                                "icon": "taobao",
+                                "color": "#ff9000",
+                                "show": true
+                            },
+                            {
+                                "name": "京东",
+                                "url": "https://www.jd.com/",
+                                "icon": "jd",
+                                "color": "#e1251b",
+                                "show": true
+                            },
+                            {
+                                "name": "天猫",
+                                "url": "https://www.tmall.com/",
+                                "icon": "tmall",
+                                "color": "#FF0036",
+                                "show": true
+                            },
+                            {
+                                "name": "小米有品",
+                                "url": "https://www.xiaomiyoupin.com/",
+                                "icon": "youpin",
+                                "color": "#845f3f",
+                                "show": true
+                            },
+                            {
+                                "name": "网易严选",
+                                "url": "http://you.163.com/",
+                                "icon": "you163",
+                                "color": "#CC9756",
+                                "show": true
+                            },
+                            {
+                                "name": "网易考拉",
+                                "url": "https://www.kaola.com/",
+                                "icon": "kaola",
+                                "color": "#ff2337",
+                                "show": true
+                            },
+                            {
+                                "name": "亚马逊",
+                                "url": "https://www.amazon.cn/",
+                                "icon": "amazon",
+                                "color": "#E67A00",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "新闻",
+                        "value": "news",
+                        "icon": "fa fa-newspaper-o",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "腾讯新闻",
+                                "url": "https://news.qq.com/",
+                                "icon": "newsqq",
+                                "color": "#5184eb",
+                                "show": true
+                            },
+                            {
+                                "name": "网易新闻",
+                                "url": "https://news.163.com/",
+                                "icon": "news163",
+                                "color": "#f34540",
+                                "show": true
+                            },
+                            {
+                                "name": "央视新闻",
+                                "url": "http://news.cctv.com/",
+                                "icon": "newscctv",
+                                "color": "#1B7AB5",
+                                "show": true
+                            },
+                            {
+                                "name": "观察者网",
+                                "url": "https://www.guancha.cn/",
+                                "icon": "guancha",
+                                "color": "#9d1518",
+                                "show": true
+                            },
+                            {
+                                "name": "新华网",
+                                "url": "http://www.xinhuanet.com/",
+                                "icon": "xinhuanet",
+                                "color": "#1d71b7",
+                                "show": true
+                            },
+                            {
+                                "name": "环球网",
+                                "url": "https://3w.huanqiu.com/",
+                                "icon": "huanqiu",
+                                "color": "#d63636",
+                                "show": true
+                            },
+                            {
+                                "name": "中国日报",
+                                "url": "http://www.chinadaily.com.cn/",
+                                "icon": "chinadaily",
+                                "color": "#014073",
+                                "show": true
+                            },
+                            {
+                                "name": "今日头条",
+                                "url": "https://www.toutiao.com/",
+                                "icon": "toutiao",
+                                "color": "#ed4040",
+                                "show": true
+                            },
+                            {
+                                "name": "IT之家",
+                                "url": "https://www.ithome.com/",
+                                "icon": "ithome",
+                                "color": "#d22222",
+                                "show": true
+                            },
+                            {
+                                "name": "中关村在线",
+                                "url": "http://www.zol.com.cn/",
+                                "icon": "zol",
+                                "color": "#3686f1",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "视频",
+                        "value": "video",
+                        "icon": "fa fa-youtube-play",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "腾讯视频",
+                                "url": "https://v.qq.com/",
+                                "icon": "vqq",
+                                "color": "#ff5c38",
+                                "show": true
+                            },
+                            {
+                                "name": "优酷",
+                                "url": "https://www.youku.com/",
+                                "icon": "youku",
+                                "color": "#24a5ff",
+                                "show": true
+                            },
+                            {
+                                "name": "爱奇艺",
+                                "url": "https://www.iqiyi.com/",
+                                "icon": "iqiyi",
+                                "color": "#00be06",
+                                "show": true
+                            },
+                            {
+                                "name": "芒果TV",
+                                "url": "https://www.mgtv.com/",
+                                "icon": "mgtv",
+                                "color": "#ff6f00",
+                                "show": true
+                            },
+                            {
+                                "name": "哔哩哔哩",
+                                "url": "https://www.bilibili.com/",
+                                "icon": "bilibili",
+                                "color": "#fb7299",
+                                "show": true
+                            },
+                            {
+                                "name": "ACFUN",
+                                "url": "https://www.acfun.cn/",
+                                "icon": "acfun",
+                                "color": "#fd4c5d",
+                                "show": true
+                            },
+                            {
+                                "name": "Youtube",
+                                "url": "https://www.youtube.com/",
+                                "icon": "youtube",
+                                "color": "#FF0000",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "音乐",
+                        "value": "music",
+                        "icon": "fa fa-music",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "QQ音乐",
+                                "url": "https://y.qq.com/",
+                                "icon": "yqq",
+                                "color": "#31c27c",
+                                "show": true
+                            },
+                            {
+                                "name": "网易云音乐",
+                                "url": "https://music.163.com/",
+                                "icon": "music163",
+                                "color": "#C20C0C",
+                                "show": true
+                            },
+                            {
+                                "name": "酷狗音乐",
+                                "url": "http://www.kugou.com/",
+                                "icon": "kugou",
+                                "color": "#0c8ed9",
+                                "show": true
+                            },
+                            {
+                                "name": "虾米音乐",
+                                "url": "https://www.xiami.com/",
+                                "icon": "xiami",
+                                "color": "#ff410f",
+                                "show": true
+                            },
+                            {
+                                "name": "酷我音乐",
+                                "url": "http://www.kuwo.cn/",
+                                "icon": "kuwo",
+                                "color": "#ffe443",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "邮件",
+                        "value": "email",
+                        "icon": "fa fa-envelope",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "QQ邮箱",
+                                "url": "https://mail.qq.com/",
+                                "icon": "mailqq",
+                                "color": "#c1d9f3",
+                                "show": true
+                            },
+                            {
+                                "name": "网易邮箱",
+                                "url": "https://mail.163.com/",
+                                "icon": "mail163",
+                                "color": "#CE0326",
+                                "show": true
+                            },
+                            {
+                                "name": "Outlook",
+                                "url": "https://outlook.live.com/",
+                                "icon": "outlook",
+                                "color": "#0078D4",
+                                "show": true
+                            },
+                            {
+                                "name": "Gmail",
+                                "url": "https://mail.google.com/",
+                                "icon": "gmail",
+                                "color": "#C03A2C",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "开发",
+                        "value": "exploitation",
+                        "icon": "fa fa-terminal",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "GitHub",
+                                "url": "https://github.com/",
+                                "icon": "github",
+                                "color": "#24292E",
+                                "show": true
+                            },
+                            {
+                                "name": "GitLab",
+                                "url": "https://about.gitlab.com/",
+                                "icon": "gitlab",
+                                "color": "#FA7035",
+                                "show": true
+                            },
+                            {
+                                "name": "Gitee",
+                                "url": "https://gitee.com/",
+                                "icon": "gitee",
+                                "color": "#C71D23",
+                                "show": true
+                            },
+                            {
+                                "name": "CodePen",
+                                "url": "https://codepen.io/",
+                                "icon": "codepen",
+                                "color": "#2FB45A",
+                                "show": true
+                            },
+                            {
+                                "name": "Node.JS",
+                                "url": "https://nodejs.org/",
+                                "icon": "nodejs",
+                                "color": "#9A744E",
+                                "show": true
+                            },
+                            {
+                                "name": "NPM",
+                                "url": "https://www.npmjs.com/",
+                                "icon": "npm",
+                                "color": "#C12127",
+                                "show": true
+                            },
+                            {
+                                "name": "Vue.JS",
+                                "url": "https://cn.vuejs.org/",
+                                "icon": "vuejs",
+                                "color": "#41B883",
+                                "show": true
+                            },
+                            {
+                                "name": "React",
+                                "url": "https://react.docschina.org/",
+                                "icon": "react",
+                                "color": "#61DAFB",
+                                "show": true
+                            },
+                            {
+                                "name": "Angular.JS",
+                                "url": "https://www.angularjs.net.cn/",
+                                "icon": "angularjs",
+                                "color": "#DD1B16",
+                                "show": true
+                            },
+                            {
+                                "name": "Sass",
+                                "url": "https://www.sass.hk/",
+                                "icon": "sass",
+                                "color": "#CC6699",
+                                "show": true
+                            },
+                            {
+                                "name": "W3School",
+                                "url": "https://www.w3school.com.cn/",
+                                "icon": "w3school",
+                                "color": "#C34244",
+                                "show": true
+                            },
+                            {
+                                "name": "MDN Web",
+                                "url": "https://developer.mozilla.org/",
+                                "icon": "mdnweb",
+                                "color": "#83D0F2",
+                                "show": true
+                            },
+                            {
+                                "name": "微信开放平台",
+                                "url": "https://mp.weixin.qq.com/",
+                                "icon": "mpweixin",
+                                "color": "#83DB40",
+                                "show": true
+                            },
+                            {
+                                "name": "阿里云",
+                                "url": "https://www.aliyun.com/",
+                                "icon": "aliyun",
+                                "color": "#FF6A00",
+                                "show": true
+                            },
+                            {
+                                "name": "WEB骇客",
+                                "url": "https://www.webhek.com/",
+                                "icon": "webhek",
+                                "color": "#333333",
+                                "show": true
+                            }
+                        ]
+                    },
+                    {
+                        "name": "工具",
+                        "value": "tool",
+                        "icon": "fa fa-wrench",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "VS Code",
+                                "url": "https://code.visualstudio.com/",
+                                "icon": "vscode",
+                                "color": "#0066B8",
+                                "show": true
+                            },
+                            {
+                                "name": "Jetbrains",
+                                "url": "https://www.jetbrains.com/",
+                                "icon": "jetbrains",
+                                "color": "#27282c",
+                                "show": true
+                            },
+                            {
+                                "name": "HbuilderX",
+                                "url": "https://www.dcloud.io/hbuilderx.html",
+                                "icon": "hbuilderx",
+                                "color": "#5ab46a",
+                                "show": true
+                            },
+                            {
+                                "name": "Typora",
+                                "url": "https://typora.io/",
+                                "icon": "typora",
+                                "color": "#999999",
+                                "show": true
+                            },
+                            {
+                                "name": "uTool",
+                                "url": "https://u.tools/",
+                                "icon": "utool",
+                                "color": "#525f7f",
+                                "show": true
+                            },
+                            {
+                                "name": "Drawboard",
+                                "url": "https://www.drawboard.com/",
+                                "icon": "drawboard",
+                                "color": "#608B8B",
+                                "show": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "待办",
+                "value": "ToDo",
+                "icon": "fa fa-star",
+                "color": "#FFB11B",
+                "show": true,
+                "content": []
+            },
+            {
+                "name": "设置",
+                "value": "Setting",
+                "icon": "fa fa-cog",
+                "color": "#43341B",
+                "show": true,
+                "content": [
+                    {
+                        "name": "背景",
+                        "type": "button",
+                        "value": "changebg",
+                        "href": "",
+                        "color": "#cbcbcb",
+                        "icon": "fa fa-photo",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "上传图片",
+                                "type": "changebg",
+                                "value": "changebg",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "必应壁纸",
+                                "type": "changebg",
+                                "value": "setBingImage",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "恢复默认",
+                                "type": "changebg",
+                                "value": "setdefault",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "皮肤",
+                        "type": "button",
+                        "value": "skin",
+                        "href": "",
+                        "icon": "fa fa-smile-o",
+                        "show": false,
+                        "content": [
+                            {
+                                "name": "浅灰",
+                                "type": "skin",
+                                "value": "skin_OfficeStory",
+                                "href": "./css/skin/skin_OfficeStory.min.css",
+                                "color": "#303052",
+                                "icon": "",
+                                "show": true,
+                                "content": "十分素雅的配色，带有一定的日式风格的颜色搭配，当然现在在很多地方都有使用，如商业场合，家庭家居，即使在网页设计中也屡见不鲜，同时也多见于男性服装的色彩搭配上。"
+                            },
+                            {
+                                "name": "简白",
+                                "type": "skin",
+                                "value": "skin_SunsetBeach",
+                                "href": "./css/skin/skin_SunsetBeach.min.css",
+                                "color": "#FFC549",
+                                "icon": "",
+                                "show": true,
+                                "content": "在以灰色作为主色调的画面中加入高纯度的色彩，这种配色方法非常常见，也很容易搭配出出人意料的效果，这个的搭配方法可以使设计主题突出，并其他吸引观者的效果。"
+                            },
+                            {
+                                "name": "海蓝",
+                                "type": "skin",
+                                "value": "skin_WindColor",
+                                "href": "./css/skin/skin_WindColor.min.css",
+                                "color": "#C3DFEA",
+                                "icon": "",
+                                "show": true,
+                                "content": "风是什么颜色？只有最无聊的人会去考虑这个问题，的确——我很无聊，但是这个色彩带给我们的感觉和微风拂面时候带来的感觉是相似的，同样清凉，舒适，如果你能享受这样简单的愉悦，就能体会这个色彩搭配带来的乐趣。"
+                            },
+                            {
+                                "name": "透明风格",
+                                "type": "skin",
+                                "value": "skin_Transparent",
+                                "href": "./css/skin/skin_Transparent.min.css",
+                                "color": "",
+                                "icon": "",
+                                "show": false,
+                                "content": "透明风格配色，仅适用于添加背景图片时使用。"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "UI风格",
+                        "type": "button",
+                        "value": "uistyle",
+                        "href": "",
+                        "icon": "fa fa-snowflake-o",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "圆角",
+                                "type": "uistyle",
+                                "value": "uistyle_default",
+                                "href": "./css/uistyle/default.min.css",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "方形",
+                                "type": "uistyle",
+                                "value": "uistyle_square",
+                                "href": "./css/uistyle/square.min.css",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "拟态",
+                                "type": "uistyle",
+                                "value": "uistyle_neumorphism",
+                                "href": "./css/uistyle/neumorphism.min.css",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Logo样式",
+                        "type": "button",
+                        "value": "logoStyle",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-ticket",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "文字",
+                                "value": "textLogo",
+                                "type": "logoStyle",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "时间",
+                                "value": "timeLogo",
+                                "type": "logoStyle",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "隐藏",
+                                "value": "closeLogo",
+                                "type": "logoStyle",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "随机语句",
+                        "type": "button",
+                        "value": "sentence",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-ticket",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "今日诗词",
+                                "value": "jinrishici",
+                                "type": "sentence",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "一言",
+                                "value": "hitokoto",
+                                "type": "sentence",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "隐藏",
+                                "value": "hideSentence",
+                                "type": "sentence",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "布局",
+                        "type": "button",
+                        "value": "layout",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-ticket",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "常规",
+                                "value": "commonLayout",
+                                "type": "layout",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "分离",
+                                "value": "SeparateLayout",
+                                "type": "layout",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "极简",
+                                "value": "miniLayout",
+                                "type": "layout",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "常用网址",
+                        "type": "button",
+                        "value": "commonUse",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-heart",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "开启",
+                                "value": "website_open",
+                                "type": "changeCommonUse",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "关闭",
+                                "value": "website_close",
+                                "type": "changeCommonUse",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "数据管理",
+                        "type": "button",
+                        "value": "dataManagement",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-hdd-o",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "常用网址数据",
+                                "value": "commonUseData",
+                                "type": "dataManagement",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "侧边栏数据",
+                                "value": "sidebarData",
+                                "type": "dataManagement",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "搜索历史",
+                                "value": "searchData",
+                                "type": "dataManagement",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "备份与恢复",
+                        "type": "button",
+                        "value": "backupAndRecovery",
+                        "href": "",
+                        "color": "",
+                        "icon": "fa fa-download",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "备份数据",
+                                "value": "backupData",
+                                "type": "backupAndRecovery",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "恢复数据",
+                                "value": "recoveryData",
+                                "type": "backupAndRecovery",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "关于",
+                        "type": "content",
+                        "value": "about",
+                        "href": "",
+                        "icon": "fa fa-question-circle-o",
+                        "color": "#0078D4",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "简介",
+                                "value": "introduction",
+                                "href": "https://gitee.com/anothersearch",
+                                "color": "#0078D4",
+                                "icon": "fa fa-pencil-square-o",
+                                "show": true,
+                                "content": "一个简洁的新标签页"
+                            },
+                            {
+                                "name": "作者",
+                                "value": "author",
+                                "href": "https://gitee.com/anothersearch",
+                                "color": "#D0104C",
+                                "icon": "fa fa-user-o",
+                                "show": true,
+                                "content": "Vir"
+                            },
+                            {
+                                "name": "联系方式",
+                                "value": "contact",
+                                "href": "",
+                                "icon": "fa fa-commenting-o",
+                                "show": true,
+                                "content": [
+                                    {
+                                        "name": "邮箱",
+                                        "value": "email",
+                                        "type": "innerlist",
+                                        "href": "",
+                                        "color": "#0078D4",
+                                        "icon": "fa fa-envelope-o",
+                                        "show": true,
+                                        "content": "ezharjan@outlook.com"
+                                    },
+                                    {
+                                        "name": "GitHub",
+                                        "value": "github",
+                                        "type": "innerlist",
+                                        "href": "https://gitee.com/anothersearch",
+                                        "color": "#24292E",
+                                        "icon": "fa fa-github-alt",
+                                        "show": true,
+                                        "content": "https://gitee.com/anothersearch"
+                                    },
+                                    {
+                                        "name": "QQ群",
+                                        "value": "qqgroup",
+                                        "type": "innerlist",
+                                        "href": "https://jq.qq.com/",
+                                        "color": "#24292E",
+                                        "icon": "fa fa-qq",
+                                        "show": true,
+                                        "content": "暂无"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "更新记录",
+                        "type": "button",
+                        "value": "updateRecord",
+                        "href": "",
+                        "icon": "fa fa-calendar-check-o",
+                        "color": "",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "查看记录",
+                                "value": "showUpdate",
+                                "type": "updateRecord",
+                                "href": "",
+                                "color": "",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    },
+                    {
+                        "name": "感谢",
+                        "type": "link",
+                        "value": "thanks",
+                        "href": "",
+                        "icon": "fa fa-thumbs-o-up",
+                        "show": true,
+                        "content": [
+                            {
+                                "name": "今日诗词 API",
+                                "value": "jinrishici",
+                                "type": "thanks",
+                                "href": "https://www.jinrishici.com",
+                                "color": "#1aaf5d",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "必应壁纸 API",
+                                "value": "bingBg",
+                                "type": "thanks",
+                                "href": "https://bing.ioliu.cn/",
+                                "color": "#006d21",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            },
+                            {
+                                "name": "一言 API",
+                                "value": "hitokoto",
+                                "type": "thanks",
+                                "href": "https://developer.hitokoto.cn/",
+                                "color": "#3EAF7C",
+                                "icon": "",
+                                "show": true,
+                                "content": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "高级设置",
+                "value": "advancedSettings",
+                "icon": "fa fa-cog",
+                "color": "#43341B",
+                "show": false,
+                "content": [
+                    {
+                        "name": "调整UI圆角",
+                        "value": "changeRadios",
+                        "type": "range",
+                        "href": "",
+                        "color": "#006d21",
+                        "icon": "",
+                        "show": true,
+                        "content": ""
+                    },
+                    {
+                        "name": "调整页面配色",
+                        "value": "changeColors",
+                        "type": "colorSelector",
+                        "href": "",
+                        "color": "#006d21",
+                        "icon": "",
+                        "show": false,
+                        "content": ""
+                    }
+                ]
+            }
+        ]
+    },
+    "copyright": {
+        "href": "http://gitee.com/anothersearch",
+        "show": true,
+        "content": "©#before#-#after# by #author#. All rights reserved."
+    }
+}

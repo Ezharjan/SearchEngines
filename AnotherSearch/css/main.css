@@ -1,0 +1,1674 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    counter-reset: item-count;
+}
+
+html {
+    position: fixed;
+}
+
+body {
+    overflow: hidden;
+}
+
+a {
+    transition: .3s;
+    color: #333;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+span {
+    display: inline-block;
+}
+
+#body {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-logo {
+    width: 100%;
+    margin-bottom: 40px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 48px;
+    padding: 15px 60px;
+    color: #ffffff;
+    /* background: hsl(0, 50%, 45%); */
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+    text-shadow: 1px 1px black, 2px 2px black,
+        3px 3px black, 4px 4px black,
+        5px 5px black, 6px 6px black,
+        7px 7px black, 8px 8px black;
+}
+
+.text-logo p {
+    margin: 0;
+    letter-spacing: 18px;
+}
+
+.text-logo p:nth-child(2) {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: lighter;
+    letter-spacing: 8px;
+    text-shadow: 1px 1px black, 2px 2px black;
+    text-decoration: underline;
+    text-decoration-color: #ffffff;
+    text-underline-position: under;
+    text-transform: uppercase;
+}
+
+.search-logo img {
+    width: 50%;
+    height: 50%;
+    margin-bottom: 20px;
+}
+
+.time-logo {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.time-logo p:nth-child(1) span:last-child {
+    font-size: 24px;
+}
+
+.time-logo p:nth-child(2) {
+    font-size: 14px;
+    text-align: center;
+}
+
+.search-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.search-group {
+    overflow: hidden;
+    position: relative;
+    max-width: 760px;
+    width: 100%;
+    display: flex;
+    z-index: 300;
+    height: 44px;
+    margin: 0 auto;
+    font-size: small;
+    transition: 0.3s linear;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+
+}
+
+.search-group:hover {
+    box-shadow: 0px 2.6px 4.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+.search-select {
+    z-index: 1;
+    position: relative;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-select span {
+    margin-right: 2px;
+}
+
+.search-select:hover {
+    cursor: pointer;
+}
+
+.search-option {
+    font-size: small;
+    overflow: hidden;
+    max-width: 760px;
+    display: none;
+    box-sizing: border-box;
+    flex: none;
+    width: 100%;
+    margin: 5px 0 0;
+    overflow: hidden;
+    position: absolute;
+    top: 45px;
+    z-index: 600;
+    transition: 0.3s linear;
+    padding: 5px;
+}
+
+.option-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-title span {
+    display: inline-flex;
+    align-items: center;
+}
+
+.switch-box {
+    position: relative;
+    border-radius: 18px;
+    width: 36px;
+    height: 18px;
+    margin: 0 5px;
+    background: #ffffff;
+    display: inline-block;
+    box-shadow: 5px 5px 5px #888888 inset;
+    overflow: hidden;
+}
+
+.switch-content {
+    border: 0 none !important;
+    height: 1px !important;
+    position: absolute !important;
+    width: 1px !important;
+    transition: 0.3s ease;
+}
+
+.switch-label {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    width: 36px;
+    height: 18px;
+    top: 0px;
+    left: 0px;
+    background-color: red;
+    transition: .5s;
+}
+
+.switch-content:checked+.switch-label {
+    background-color: green;
+}
+
+.switch-content:checked+.switch-label::before {
+    top: 0;
+    left: 17px;
+    animation: labelON 0.2s ease-in 0s 1;
+    box-shadow: #244766 -1px 0px 3px;
+}
+
+.switch-content+.switch-label::before {
+    content: "";
+    background-color: #fff;
+    top: 0;
+    left: 0;
+    animation: labelOFF 0.2s ease-in 0s 1;
+    box-shadow: #244766 1px 1px 3px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    z-index: 10;
+    margin: 2px;
+    box-shadow: #244766 1px 0px 3px;
+}
+
+.search-option ul {
+    margin: 0;
+}
+
+.search-option p {
+    margin: 0;
+    padding-left: 5px;
+    font-weight: bold;
+}
+
+.search-option li {
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 62px;
+    height: 25px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s linear;
+    border-radius: 5px;
+    margin: 0 2px;
+}
+
+/* 解决点击冒泡问题 */
+.search-option li::after {
+    position: absolute;
+    width: 62px;
+    height: 25px;
+    content: "";
+}
+
+.search-option li:hover {
+    cursor: pointer;
+}
+
+.search-option img,
+.search-select img {
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.search-input,
+.search-btn {
+    z-index: 1;
+    position: relative;
+    border: none;
+    background: transparent;
+    outline: transparent !important;
+}
+
+.search-input {
+    flex: 1;
+    width: auto;
+}
+
+.search-btn {
+    width: 70px;
+}
+
+#searchList {
+    display: none;
+    box-sizing: border-box;
+    text-align: left;
+    position: absolute;
+    z-index: 100;
+    top: 50px;
+    max-width: 760px;
+    max-height: 350px;
+    overflow: -moz-scrollbars-none;
+    overflow: hidden;
+    overflow-y: auto;
+    width: 100%;
+    border-radius: 8px;
+}
+
+#searchList::-webkit-scrollbar {
+    width: 0 !important
+}
+
+#searchList li {
+    margin: 5px;
+    transition: 0.3s linear;
+    position: relative;
+    height: 32px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+}
+
+/* 备选项前序号 */
+#searchList li::before {
+    content: counter(item-count);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    color: #FFF;
+    background: #999999;
+    font-size: 12px;
+    border-radius: 9px;
+    margin-right: 5px;
+    counter-increment: item-count;
+}
+
+#searchList li:first-child:before {
+    background: #FD8C84;
+}
+
+#searchList li:nth-child(2):before {
+    background: #FFCC99;
+}
+
+#searchList li:nth-child(3):before {
+    background: #7FD75A;
+}
+
+#searchList li:nth-child(4):before {
+    background: #CCCCFF;
+}
+
+#searchList li:nth-child(5):before {
+    background: #60C4FD;
+}
+
+#searchList li:last-child:before {
+    content: "..";
+}
+
+#searchList li a {
+    width: 100%;
+    font-size: 14px;
+    transition: 0.3s linear;
+}
+
+.poetry {
+    margin: 30px 0;
+    box-sizing: border-box;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.poetry-content,
+.poetry-info {
+    width: 100%;
+}
+
+.poetry-info {
+    font-weight: 200;
+    text-align: right;
+    align-self: flex-end;
+}
+
+.changebg {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+    top: 0;
+    z-index: 10;
+}
+
+#setBackGround {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+#sideBar {
+    position: absolute;
+    width: 370px;
+    right: -370px;
+    top: 0;
+    bottom: 0;
+    font-size: 28px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#sideBarButton {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    top: 10px;
+    font-size: 32px;
+    transform: scale(0.8);
+    overflow: hidden;
+    border-radius: 5px;
+    transition: 0.3s linear;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+#sideBarButton:hover {
+    cursor: pointer;
+}
+
+#sideBarTitle,
+#sideBarContent,
+.move {
+    height: 100%;
+    display: inline-block;
+}
+
+#sideBarTitle {
+    width: 30px;
+    box-sizing: border-box;
+}
+
+#sideBarContent {
+    width: 340px;
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* 高级设置样式 */
+#advancedSettings {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+#advancedSettings:hover {
+    cursor: pointer;
+}
+
+#advancedSettings::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 20px;
+}
+
+.advanced-settings-content {
+    width: 100%;
+}
+
+.advanced-settings-content .advanced-settings-input {
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.advanced-settings-input input {
+    width: 100%;
+}
+
+/*滚动条宽高*/
+#sideBarContent::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/*正常情况下滑块的样式*/
+#sideBarContent::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+}
+
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+#sideBarContent:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*鼠标悬浮在滑块上时滑块的样式*/
+#sideBarContent::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*正常时候的主干部分/滑轨部分*/
+#sideBarContent::-webkit-scrollbar-track {
+    /* border-radius: 10px; */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}
+
+/*鼠标悬浮在滚动条上的主干部分/滑轨部分*/
+#sideBarContent::-webkit-scrollbar-track:hover {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}
+
+#sideBarContent p {
+    box-sizing: border-box;
+    margin: 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 2px solid #8F8F8F;
+    font-size: 16px;
+    color: #8F8F8F;
+}
+
+#scrollContent {
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.moveLeft {
+    animation: moveLeft 0.5s forwards;
+}
+
+.moveRight {
+    animation: moveRight 0.5s forwards;
+}
+
+.sideBarButtonMoveLeft {
+    animation: sideBarButtonMoveLeft 0.5s forwards;
+}
+
+.sideBarButtonMoveRight {
+    animation: sideBarButtonMoveRight 0.5s forwards;
+}
+
+.messageMoveLeft {
+    animation: messageMoveLeft 0.5s forwards;
+}
+
+.messageMoveRight {
+    animation: messageMoveRight 0.5s forwards;
+}
+
+.title-icon {
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 22px;
+    box-sizing: border-box;
+    margin: 5px 0;
+    padding: 3px 0;
+}
+
+.title-icon i {
+    display: block;
+    width: 25px;
+    height: 25px;
+}
+
+.title-icon span {
+    display: block;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.title-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.capsule-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 10px;
+}
+
+.capsule {
+    width: auto;
+    height: auto;
+    margin: 5px;
+    padding: 2px;
+    transition: 0.3s linear;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+.capsule:hover {
+    cursor: pointer;
+}
+
+.capsule::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.capsule span {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.capsule div {
+    height: 24px;
+    display: block;
+    font-weight: bolder;
+    font-size: 12px;
+    text-align: center;
+}
+
+.capsule input:hover {
+    cursor: pointer;
+}
+
+.setlist,
+.about-content {
+    box-sizing: border-box;
+    margin: 10px 15px;
+    padding: 6px 10px;
+    font-size: 16px;
+    transition: 0.3s;
+    position: relative;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+.setlist {
+    padding: 3px 5px;
+    font-size: 14px;
+}
+
+.setlist:hover {
+    cursor: pointer;
+}
+
+.setlist::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.setlist a {
+    position: relative;
+    z-index: 3;
+}
+
+.setlist input:hover {
+    cursor: pointer;
+}
+
+.about-info span {
+    display: block;
+}
+
+.about-info span:nth-child(2) {
+    text-indent: 20px;
+}
+
+.innerlist {
+    margin-left: 30px;
+}
+
+#commonUse {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 12.5%);
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.commons {
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 5px;
+    position: relative;
+    z-index: 1;
+    height: 90px;
+    transition: all 0.2s ease-in-out;
+    border-radius: 4px;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+.commons-content {
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.commons-content img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.commons-content .text-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-top: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.commons-content a {
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    box-sizing: content-box;
+    max-height: 16px;
+    white-space: nowrap;
+    max-width: 100%;
+    margin: 17px 0 0 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: inherit;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    color: #2B2B2B;
+}
+
+.commons-content a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.commons-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: absolute;
+    top: 4px;
+    background: transparent;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    transition: all 0.2s ease-in-out;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    right: 4px;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    fill: #2B2B2B;
+}
+
+.commons-btn:hover {
+    opacity: 1;
+}
+
+.commons-btn::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.commons-addbtn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.commons-addbtn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.commons a {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#copyright {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    z-index: 1000;
+    text-align: center;
+    width: 100%;
+}
+
+#copyright a {
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    transition: 0.5s;
+}
+
+#messageList {
+    position: fixed;
+    z-index: 2001;
+    top: 20px;
+    right: 20px;
+    transition: 0.5s;
+}
+
+#messageList li {
+    overflow: hidden;
+    position: relative;
+    right: -380px;
+    width: 330px;
+    height: 80px;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding-right: 15px;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+#messageList div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 40px;
+}
+
+#messageList div:nth-child(2) {
+    width: 80%;
+    height: 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#messageList p {
+    margin: 0;
+}
+
+#messageList p:nth-child(1) {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#messageList p:nth-child(2) {
+    font-size: 14px;
+}
+
+#messageList .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 30px;
+}
+
+#messageList .success {
+    color: green;
+}
+
+#messageList .error {
+    color: red;
+}
+
+.dialogWrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.34);
+    opacity: 0;
+    animation: dialog 0.2s ease-in-out 1 forwards;
+}
+
+.dialogWrapperClose {
+    opacity: 1;
+    animation: dialogClose 0.2s ease-in-out 1 forwards;
+}
+
+@keyframes dialog {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dialogClose {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.dialog {
+    position: relative;
+    overflow: hidden;
+    min-width: 400px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.dialog>.dialog-header {
+    box-sizing: border-box;
+    padding: 20px 20px 10px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog>.dialog-header #closeDialog {
+    color: #909399;
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+}
+
+.dialog>.dialog-header #closeDialog:hover {
+    color: #2B2B2B;
+}
+
+.dialog>.dialog-header #closeDialog::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.dialog>.dialog-body {
+    box-sizing: border-box;
+    margin: 30px 10px;
+    padding: 0 10px;
+}
+
+.dialog>.dialog-body::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+}
+
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+.dialog>.dialog-body:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*鼠标悬浮在滑块上时滑块的样式*/
+.dialog>.dialog-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*正常时候的主干部分/滑轨部分*/
+.dialog>.dialog-body::-webkit-scrollbar-track {
+    /* border-radius: 10px; */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}
+
+/*鼠标悬浮在滚动条上的主干部分/滑轨部分*/
+.dialog>.dialog-body::-webkit-scrollbar-track:hover {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}
+
+.dialog .content-label {
+    display: inline-flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #606266;
+}
+
+.dialog input {
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    outline: none;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 60%;
+}
+
+.dialog input:hover {
+    cursor: pointer;
+    border: 1px solid #c2c4ca;
+}
+
+.dialog p {
+    margin: 0;
+}
+
+.dialog>.dialog-footer {
+    box-sizing: border-box;
+    padding: 10px 20px 20px;
+    text-align: right;
+}
+
+.dialog>.dialog-footer span {
+    margin: 0 3px;
+}
+
+.dialog>.dialog-footer .default {
+    background: transparent;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+}
+
+.dialog>.dialog-footer .primary {
+    background: #409eff;
+    border: 1px solid #409eff;
+}
+
+.dialog>.dialog-footer .success {
+    background: #67c23a;
+    border: 1px solid #67c23a;
+}
+
+.dialog>.dialog-footer .info {
+    background: #909399;
+    border: 1px solid #909399;
+}
+
+.dialog>.dialog-footer .warning {
+    background: #ebb563;
+    border: 1px solid #ebb563;
+}
+
+.dialog>.dialog-footer .danger {
+    background: #f56c6c;
+    border: 1px solid #f56c6c;
+}
+
+.dialog button {
+    padding: 7px 15px;
+    font-size: 12px;
+    border-radius: 3px;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 0;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.dialog button:hover {
+    opacity: .8;
+}
+
+.show-data {
+    text-align: center;
+    height: 300px;
+    overflow: auto;
+    font-size: 14px;
+    color: #212529;
+    width: 500px;
+}
+
+.show-data-table {
+    width: 100%;
+    position: relative;
+}
+
+.show-data-table .no-data {
+    height: 240px;
+    font-size: 14px;
+}
+
+.show-data-table thead,
+.show-data-table tbody {
+    width: 100%;
+}
+
+.show-data-table th {
+    font-weight: bold;
+}
+
+.show-data-table th,
+.show-data-table td {
+    padding: .5em;
+    border-top: 1px solid #dee2e6;
+}
+
+.show-data-table td:last-child {
+    cursor: pointer;
+}
+
+.tab-color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: auto;
+}
+
+/* 代办 */
+#toDoTabs {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    padding: 5px 0;
+}
+
+#toDoTabs span {
+    padding: 5px;
+    margin: 0 5px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 默认背景色 */
+.defaultToDoTab {
+    background-color: #fff;
+}
+
+/* 选中背景色 */
+.clickToDoTab {
+    background-color: aquamarine;
+}
+
+#toDoTabs span::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#toDoContent {
+    position: relative;
+    font-size: 12px;
+    overflow: auto;
+    transition: .3s;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#toDoContent::-webkit-scrollbar {
+    display: none;
+}
+
+#noListItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#toDoContent .list-item {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 20px 5px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 5px 0;
+    border-radius: 5px;
+    position: relative;
+    transition: 0.3s;
+    box-shadow: 0px 1.6px 3.6px rgba(0, 0, 0, 0.13), 0px 0.3px 0.9px rgba(0, 0, 0, 0.11);
+}
+
+#toDoContent .list-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#toDoContent .list-item span {
+    display: block;
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#toDoContent .list-item span:nth-child(2) {
+    text-align: right;
+    font-size: 10px;
+    opacity: .3;
+}
+
+#toDoContent .list-item .item-del,
+#toDoContent .list-item .item-cancel {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+    border-bottom-left-radius: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .3s;
+    opacity: .3;
+    font-size: 10px;
+}
+
+#toDoContent .list-item .item-del i,
+#toDoContent .list-item .item-cancel i {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+#toDoContent .list-item .item-del:hover,
+#toDoContent .list-item .item-cancel:hover {
+    opacity: 1;
+    width: 38px;
+}
+
+#toDoContent .list-item .item-del::after,
+#toDoContent .list-item .item-cancel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#operationToDo {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    left: 5px;
+}
+
+.timeLine-item .item-title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.timeLine-item .item-content {
+    font-size: 14px;
+    margin: 5px 0 5px 15px;
+}
+
+.timeLine-item .label {
+    width: 50px;
+    font-size: 12px;
+    color: #FFF;
+    text-align: center;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.timeLine-item .add {
+    background: #67C23A;
+}
+
+.timeLine-item .change {
+    background: #E6A23C;
+}
+
+.timeLine-item .del {
+    background: #F56C6C;
+}
+
+.timeLine-item .debug {
+    background: #409EFF;
+}
+
+#loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background: #ffffff;
+}
+
+#loading .pic {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#loading .pic i {
+    display: block;
+    float: left;
+    width: 6px;
+    height: 50px;
+    background: #399;
+    margin: 0 2px;
+    transform: scaleY(0.4);
+    border-radius: 3px;
+    background-color: #f66;
+    animation: load 1.4s ease-in-out infinite;
+}
+
+#loading .pic i:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+#loading .pic i:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+#loading .pic i:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+#loading .pic i:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+#loading .pic i:nth-child(5) {
+    animation-delay: 1s;
+}
+
+@keyframes moveLeft {
+    from {
+        right: -370px;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@keyframes moveRight {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -370px;
+    }
+}
+
+@keyframes sideBarButtonMoveLeft {
+    from {
+        right: 10px;
+    }
+
+    to {
+        right: 380px;
+    }
+}
+
+@keyframes sideBarButtonMoveRight {
+    from {
+        right: 380px;
+    }
+
+    to {
+        right: 10px;
+    }
+}
+
+@keyframes messageMoveLeft {
+    from {
+        right: -380px;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@keyframes messageMoveRight {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -380px;
+    }
+}
+
+@keyframes labelON {
+    0% {
+        top: 0px;
+        left: 0px;
+    }
+
+    100% {
+        top: 0px;
+        left: 20px;
+    }
+}
+
+@keyframes labelOFF {
+    0% {
+        top: 0px;
+        left: 20px;
+    }
+
+    100% {
+        top: 0px;
+        left: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .poetry {
+        width: 80%;
+    }
+}
+
+@keyframes load {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    100% {
+        transform: scaleY(0.4)
+    }
+
+    20% {
+        transform: scaleY(1)
+    }
+}
+
+/* 媒体查询代码，针对小屏设备删减功能 */
+@media (max-width:1000px) {
+    #commonUse {
+        grid-template-columns: repeat(4, 25%);
+    }
+
+    .commons {
+        height: 90px;
+        margin: 5px;
+    }
+}
+
+@media (max-width:375px) {
+
+    #commonUse,
+    #sideBarButton,
+    #sideBar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        margin-bottom: 10px;
+        display: block;
+        border-bottom: 2px solid #ddd;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        font-size: 13px;
+        border-bottom: 1px dotted #ccc;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}
+
+/* 滚动条有滑块的轨道部分 */
+::-webkit-scrollbar-track-piece {
+    background-color: #ffffff;
+    border-radius: 1px;
+}
+
+/* 整个滚动条 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 100%;
+}
+
+/* 滚动条竖向滑块 */
+::-webkit-scrollbar-thumb:vertical {
+    width: 6px;
+    height: 6px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 1px;
+}
+
+/* 滚动条竖向滑块hover */
+::-webkit-scrollbar-thumb:vertical:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+/* 滚动条横向滑块 */
+::-webkit-scrollbar-thumb:horizontal {
+    width: 6px;
+    height: 6px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 1px;
+}
+
+/* 滚动条横向滑块hover */
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
+
+/* 同时有垂直和水平滚动条时交汇的部分 */
+::-webkit-scrollbar-corner {
+    display: block;
+    /* 修复交汇时出现的白块 */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+}
+
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*鼠标悬浮在滑块上时滑块的样式*/
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 197, 73, .6);
+    box-shadow: inset 1px 1px 0 rgba(255, 197, 73, .1);
+}
+
+/*正常时候的主干部分/滑轨部分*/
+::-webkit-scrollbar-track {
+    /* border-radius: 10px; */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}
+
+/*鼠标悬浮在滚动条上的主干部分/滑轨部分*/
+::-webkit-scrollbar-track:hover {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: rgba(231, 231, 231, .01);
+}

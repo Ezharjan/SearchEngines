@@ -1,0 +1,35 @@
+
+body {
+	background-color:#222225;
+
+}
+
+/*.cssnode{
+	background-color:#555555;
+
+}
+*/
+.cssnode span{ background-color:#555555;}
+/*.cssnode.hover{ background-color:#f5f5f5;}*/
+.searchtop a,.searchtop{ color:#999999}
+a:hover{ background-color:rgba(0,0,0,0); color:#FFFFFF}
+#searches a{
+	color:#f85d00;
+}
+#searches a.buttons-active{color:#ffffff; background-color:#f85d00;border: 1px solid #f85d00;}
+
+@media screen and (max-width :767px){
+.sbox .navPanel #searches a{
+	border-bottom-style: solid;
+	border-bottom-color: #dddddd;
+	background-color:#ffffff;
+	color:#555555;
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+}
+
+.sbox .navPanel #searches a:hover{ background-color:#eeeeee;}
+.sbox .navPanel #searches a.buttons-active{ background-color:#f5f5f5; color:#333333}
+}

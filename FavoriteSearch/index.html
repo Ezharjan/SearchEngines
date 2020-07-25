@@ -1,0 +1,211 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="keywords"
+        content="爱搜，深度搜索，聚合搜索，垂直搜索，综合搜索，联合搜索，聚合搜索种子，资源聚合搜索引擎，免费电子书搜索，电影搜索引擎，聚合音乐搜索，聚合游戏搜索，聚合文库搜索，聚合图片搜索，聚合题库搜索，免费搜题网站，软件搜索">
+    <meta name="description" content="爱搜索 - 高效聚合搜索-垂直搜索引擎">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>爱搜</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="Alexander-CHS.xml" title="Alexander Search">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+    <link rel="stylesheet" id="css" type="text/css" href="">
+    <script src="libs/jquery.js" language="JavaScript"></script>
+    <script type="text/javascript" src="libs/func.js"></script>
+    <script type="text/javascript" src="libs/gb2312.js"></script>
+    <script type="text/javascript" src="./src/Search.js"></script>
+    <script type="text/javascript" src="./src/Search.lang.js"></script>
+    <script type="text/javascript" src="./src/Search.config.js"></script>
+    <script language="vbscript" src="./src/utils.vbs"></script>
+</head>
+
+<body>
+    <div class="cssnode"><span></span></div>
+
+    <div class="searchtop">
+        <div class="bg"></div>
+        <div class="nav"></div>
+        <div class="categories">
+            <span id="categories"></span><i class="more">更多</i>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="bg"></div>
+        <div class="nav"></div>
+        <div class="navs">
+            <div>
+                <span id="btn_custom_prefer_wrapper">
+                    <a href="javascript:;" id="btn_custom_prefer" onclick="this.blur()" style="font-weight: bold;"></a>
+                </span>
+                <div style="display:none">
+                    <a href="javascript:;" id="btn_options" onclick="this.blur()"></a>
+                    <a href="javascript:" id="btn_AddSearch" onclick="this.blur();"></a>
+                    <a href="javascript:" id="btn_set_home" onclick="this.blur();"></a>
+                    <a href="javascript:;" id="btn_add_fav" onclick="this.blur();"></a>
+                </div>
+                <a href="./index.html" target="_blank" onclick="this.blur();">联系我们</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sbox2">
+        <div class="sbox">
+            <div class="logo">
+                <div style="width: 400px;height: 130px;">
+                    <a href="http://ezharjan.gitee.io/favoritesearch/">
+                        <!-- Your Logo Image Here -->
+                    </a>
+                </div>
+            </div>
+            <div class="search">
+                <!--			<div class="categories"><span id="categories"></span></div>-->
+                <div class="searchboxs">
+                    <div style="display:inline-block;"><span class="stype">选择</span><input type="text" id="keyword"
+                            class="text searchBox" baidusug="2">
+                        <button type="button" id="btn_go">搜索一下</button>
+                        <div id="kwhot">
+                            <!--百度热词-->
+                        </div>
+                        <span id="btn_history_wrapper"><a href="javascript:;" id="btn_history"
+                                onclick="this.blur()"></a>
+                            <div id="history" class="history" style="position:absolute;visibility:hidden;"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="navPanel" style="padding-left: 100px">
+                <div class="innerNavPanel">
+                    <div class="buttons" id="searches">
+                        <a href="#">初始化...</a> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- options wrapper -->
+    <div id="options" class="options" style="display:none;">
+
+        <div id="opt_sec_setup">
+
+            <h3><strong><span id="txt_options_header">Options</span></strong></h3>
+
+            <p>
+                <span id="txt_opt_lang">Interface Language</span>: &nbsp;&nbsp;
+                <select id="opt_lang"></select>
+            </p>
+            <p><span id="txt_opt_save_history">Save Keyword History</span>: <select id="opt_save_history"></select>
+                <span id="_counts">Items</span></p>
+            <p><span id="txt_opt_load_all">Load All Tables at Once</span>: <select id="opt_load_all"></select> <span
+                    id="_time">s</span></p>
+
+        </div>
+
+        <div id="opt_sec_list">
+
+            <h3><span id="txt_options_list">Customize Prefered Search List</span></h3>
+
+            <table width="100%" cellpadding="0" cellspacing="4" border="0" class="prefer-list">
+                <tr>
+                    <td width="50%">
+                        <span style="float:right;">
+                            <a id="btn_list_default" href="javascript:;">
+                                <span id="txt_list_default">Restore Default</span>
+                            </a>
+                            &nbsp;&nbsp;
+                            <!-- <a href="javascript:;" onclick="Search.options.list.moveItem(-1)"><img width="16" height="16" src="images/btn_up.png" id="img_list_up" alt="Move Up"></a>
+                        <a href="javascript:;" onclick="Search.options.list.moveItem(1)"><img width="16" height="16" src="images/btn_down.png" id="img_list_Down" alt="Move Down"></a> -->
+                        </span>
+                        <strong id="txt_list_current_prefered">Current Prefered List</strong>
+                    </td>
+                    <td width="50%" align="right">
+                        <span id="txt_list_add_text">Click to Add or</span><a id="btn_add_new" href="javascript:;"><span
+                                id="txt_list_i_new">Add Custom</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%" valign="top">
+                        <div id="list_prefered" class="list-hot"></div>
+                    </td>
+                    <td width="50%" valign="top">
+                        <div id="list_all" class="list"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+
+                        <div id="opt_edit_table">
+                            <table width="100%" cellpadding="8" cellspacing="0" border="0" class="list-edit-table">
+                                <tr>
+                                    <td class="list-row-header"><span id="txt_list_i_name">Display Name</span>:</td>
+                                    <td>
+                                        <input id="i_name" type="text" value="" class="text" style="width:300px;">
+                                        &nbsp;
+                                        <span id="i_note_internal" class="comment">Can not delete internal item</span>
+                                        <span id="i_note_edit" class="comment">Use {keyword} in search string</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="list-row-header"><span id="txt_list_i_url">Search URL</span>:</td>
+                                    <td><input id="i_url" type="text" value="" class="text" style="width:99%;"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+        <p>
+            <input id="btn_opt_save" type="button" class="button" value=" Save "> &nbsp;
+            <input id="btn_opt_cancel" type="button" class="button" value=" Cancel ">
+        </p>
+
+        <p>&nbsp;</p>
+
+    </div>
+
+    <!-- content wrapper -->
+    <div id="content"></div>
+
+    <!-- note wrapper -->
+    <div id="note" class="note" style="display:none;"></div>
+
+
+
+    <div id="Copyright" class="Copyright">
+        <!-- <a target="_blank" href="/helpc/#使用指南">使用指南</a> | <a target="_blank" href="/liuyanfankui/index.php">留言反馈</a> | <a target="_blank" href="/helpc/#免责声明">免责声明</a> | <a target="_blank" href="/lianxiwomen/index.html">联系我们</a> | <a target="_blank" href="/helpc/#合作伙伴">合作伙伴</a><br>        &copy; 2020-2020&nbsp;<b><a target="_blank" class="TBLink" href="">gitee.com/ezharjan</a></b> 版权所有
+        <a target="_blank" href="javascript:;"></a> -->
+    </div>
+
+
+    <script src="src/index.js"></script>
+
+    <!-- 百度统计 -->
+    <script src="libs/baiduStatic.js"></script>
+
+
+    <!-- CNZZ统计 -->
+    <div style="display:none">
+        <!-- <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1279009216&web_id=1279009216"></script> -->
+        <script type="text/javascript" src="libs/cnzz.js"></script>
+    </div>
+
+
+</body>
+
+</html>

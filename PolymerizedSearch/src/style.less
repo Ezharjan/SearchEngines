@@ -1,0 +1,222 @@
+:global{
+  body{
+    padding:0;
+    margin:0;
+  }
+}
+.Footer {
+  text-align: center;
+}
+
+.Headerbar {
+  margin: 0 60px;
+  height: 58px;
+}
+
+.Logo {
+  height: 36px;
+  cursor: pointer;
+}
+
+.AboutLink {
+  color: white;
+  float: right;
+  margin-right: 14px;
+}
+
+.SearchWrap {
+  position: relative;
+}
+
+.Search {
+  width: 100%;
+  height: 48px;
+  margin-top: 20px;
+  line-height: 40px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: 1px #ccc solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.SearchButton {
+  position: absolute;
+  top: 24px;
+  right: 7px;
+  width: 30px;
+  cursor: pointer;
+  background: #fff;
+  padding: 5px;
+}
+
+.TopSearch {
+  margin-top: 10px;
+  width: 480px;
+  display: inline-block;
+
+  .Search {
+    margin-top: 0;
+    height:40px;
+    box-shadow: none;
+  }
+
+  .SearchButton {
+    top: 8px;
+    padding: 0 5px;
+    width:24px
+  }
+}
+.TopLogo{
+  width: 48px;
+  display: block;
+  float: left;
+  margin: 5px 8px 0 0 ;
+}
+.SearchPage {
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.SearchBar {
+  width: 546px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-left: -273px;
+}
+.Logo {
+  height: 48px;
+}
+
+.LogoWrap {
+  margin-bottom: 14px;
+  text-align: center;
+}
+ 
+
+.Header {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  padding: 0 !important;
+  top: 0;
+  left: 0;
+  height: 60px !important;
+  background: #fff !important;
+  border-bottom: 2px solid rgba(97, 95, 90, 0.7) !important;
+}
+
+.Content {
+  position: relative;
+  padding-top: 60px;
+  overflow: hidden;
+}
+
+.CoverWrap {
+  position: relative;
+}
+
+.Github{
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.Info {
+  padding: 14px;
+}
+
+.Footer {
+  text-align: center;
+  padding: 5px 0px;
+  color: rgba(0, 0, 0, .65);
+  font-size: 14px;
+  background: #f0f2f5;
+}
+
+
+.Column {
+  margin-bottom: 20px;
+}
+
+.About {
+  min-height: 500px;
+}
+
+.Cover {
+  width: 260px;
+  height: 146px;
+  box-shadow: 0 0 9px -1px rgba(0, 0, 0, .16);
+  border: 1px solid #000000;
+}
+
+.Reslut {
+  width: 1000px;
+}
+
+.Card {
+  display: flex;
+  width: 100%;
+  height: 172px;
+  padding: 14px 0;
+  border-bottom: 1px solid #d4d4d4;
+  overflow: hidden;
+  background: #fff;
+}
+
+.LinkWrap{
+  padding: 14px 110px;
+}
+
+.Link{
+  display:inline-block;
+  text-decoration:none;
+  font-weight: bold;
+  padding: 0 10px;
+  color: rgb(0, 0, 0);
+}
+
+.Tab{
+  display:inline-block;
+  text-decoration:none;
+  font-style: italic;
+  padding: 0 10px;
+  color: rgb(38, 0, 255);
+}
+
+:global([role=tabpanel]){
+  padding:0 !important;
+}
+ 
+@media screen and (max-width: 750px) {
+  .SearchPage {
+    position:fixed;
+  }
+  .SearchBar{
+    width:90%;
+    margin-left: 0;
+    left: 5%;
+  }
+  .Headerbar{
+    margin: 0 10px;
+  }
+  .TopSearch{
+    width: 220px;
+  }
+  .LinkWrap{
+    padding:10px;
+  }
+}
+.Tip{
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 13px;
+}
