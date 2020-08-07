@@ -17,6 +17,14 @@ export const links = keyword => [
         link: `https://stackoverflow.com/search?q=${keyword}`
     },
     {
+        title: "Goobe",
+        link: `https://goobe.io/search.aspx?k=${keyword}`
+    },
+    // {
+    //     title: "简书",
+    //     link: `https://www.jianshu.com/search?q=${keyword}`
+    // },
+    {
         title: "知乎",
         link: `https://www.zhihu.com/search?type=content&q=${keyword}`
     },
@@ -25,16 +33,8 @@ export const links = keyword => [
         link: `https://juejin.im/search?query=${keyword}&type=all`
     },
     {
-        title: "Goobe",
-        link: `https://goobe.io/search.aspx?k=${keyword}`
-    },
-    {
-        title: "搜狗",
-        link: `https://www.sogou.com/web?pid=yuzi&query=${keyword}&type=2&ie=utf8`
-    },
-    {
         title: "严搜",
-        link: `https://yandex.com/search/?text${keyword}&lr=10590`
+        link: `https://yandex.com/search/?text=${keyword}&lr=10590`
     },
     {
         title: "微信",
@@ -46,7 +46,11 @@ export const links = keyword => [
     },
     {
         title: "智库",
-        link: `https://wiki.mbalib.com/wiki/${keyword}`
+        link: `https://wiki.mbalib.com/wiki/Special:Search?search=${keyword}&go=%E8%BF%9B%E5%85%A5`
+    },
+    {
+        title: "万方",
+        link: `http://www.wanfangdata.com.cn/search/searchList.do?searchType=all&showType=&pageSize=&searchWord=${keyword}&isTriggerTag=`
     },
     {
         title: "夸克",
@@ -56,10 +60,6 @@ export const links = keyword => [
     //     title: "Google",
     //     link: `https://www.google.com.hk/search?safe=strict&source=hp&q=${keyword}&oq=${keyword}`
     // },
-    {
-        title: "简书",
-        link: `https://www.jianshu.com/search?q=${keyword}`
-    },
     {
         title: "Magi",
         link: `https://magi.com/search?q=${keyword}`,
@@ -79,6 +79,18 @@ export const links = keyword => [
     {
         title: "短片",
         link: `https://www.nowness.cn/?modal=search&search=${keyword}`
+    },
+    {
+        title: "图标",
+        link: `https://www.iconfont.cn/search/index?q=${keyword}`
+    },
+    {
+        title: "柯斯林",
+        link: `https://www.collinsdictionary.com/dictionary/english/${keyword}`
+    },
+    {
+        title: "SourceForge",
+        link: `https://sourceforge.net/directory/os:windows/?q=${keyword}`
     }
 ];
 
@@ -89,16 +101,28 @@ export const tabs = (keyword) => [
         link: `https://cn.bing.com/search?q=${keyword}`
     },
     {
+        title: "百度",
+        link: `https://www.baidu.com/s?wd=${keyword}`
+    },
+    {
+        title: "搜狗",
+        link: `https://www.sogou.com/web?pid=yuzi&query=${keyword}&type=2&ie=utf8`
+    },
+    {
+        title: "360",
+        link: `https://www.so.com/s?ie=utf-8&fr=so.com&src=home_so.com&nlpv=basest&q=${keyword}`
+    },
+    {
+        title: "多吉",
+        link: `https://www.dogedoge.com/results?q=${keyword}`
+    },
+    {
         title: "OSChina",
         link: `https://www.oschina.net/search?scope=project&q=${keyword}`
     },
     {
         title: "百度学术",
         link: `https://xueshu.baidu.com/s?wd=${keyword}`
-    },
-    {
-        title: "万方",
-        link: `http://s.g.wanfangdata.com.cn/Paper.aspx?q=${keyword}`
     },
     {
         title: "知网",
@@ -149,24 +173,24 @@ export const tabs = (keyword) => [
         link: `http://www.1mpi.com/search/${keyword}`
     },
     {
-        title: "文搜",
+        title: "盘搜",
         link: `http://wjsou.com/s2/${keyword}.html`
     },
     {
         title: "搜PDF",
         link: `https://cn.bing.com/search?q=filetype:pdf ${keyword}`
     },
-    {
-        title: "搜题",
-        link: `http://answer.sx87.cn/?q=${keyword}`
-    },
+    // {
+    //     title: "搜题",
+    //     link: `http://answer.sx87.cn/?q=${keyword}`
+    // },
     {
         title: "SF",
         link: `https://segmentfault.com/search?q=${keyword}`,
     },
     {
         title: "Yarn",
-        link: `https://www.yarnpkg.com/zh-Hans/packages?q=${keyword}`
+        link: `https://classic.yarnpkg.com/zh-Hans/packages?q=${keyword}&p=1`
     },
     {
         title: "新闻",
@@ -181,10 +205,6 @@ export const tabs = (keyword) => [
         link: `https://www.sq688.com/search.php?key=${keyword}`
     },
     {
-        title: "图标",
-        link: `https://www.iconfont.cn/search/index?q=${keyword}`
-    },
-    {
         title: "百度文库",
         link: `https://wenku.baidu.com/search?word=${keyword}`
     },
@@ -193,16 +213,8 @@ export const tabs = (keyword) => [
         link: `https://www.wenku365.com/s?keyword=${keyword}`
     },
     {
-        title: "多吉",
-        link: `https://www.dogedoge.com/results?q=${keyword}`
-    },
-    {
         title: "慕课",
         link: `https://www.icourse163.org/search.htm?search=${keyword}`
-    },
-    {
-        title: "百度",
-        link: `https://www.baidu.com/s?wd=${keyword}`
     },
     {
         title: "翻译",
@@ -248,10 +260,7 @@ export const tabs = (keyword) => [
         title: "词典",
         link: `https://www.merriam-webster.com/dictionary/${keyword}`
     },
-    {
-        title: "柯斯林",
-        link: `https://www.collinsdictionary.com/dictionary/english/${keyword}`
-    },
+
 ];
 
 
