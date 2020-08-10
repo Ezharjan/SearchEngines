@@ -9,7 +9,7 @@ This is the released version of Polymerized searching engine designed and develo
 
 <br>
 
-[Gitee Pages](http://ezharjan.gitee.io/polsearch/)
+[Gitee Pages](https://ezharjan.gitee.io/polsearch/)
 
 <br>
 
