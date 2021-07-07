@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<!-- <html manifest="cache.appcache"> -->
+<html lang="en">
+
+</html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>基于Web的多搜索引擎同时搜索网站</title>
+    <meta name="keywords" content="基于Web的多搜索引擎同时搜索网站,多搜索引擎同时搜索网站">
+    <meta name="description" content="基于Web的多搜索引擎同时搜索网站,聚合主流热门的搜索引擎的搜索结果,根据关键字同步调用各大搜索引擎,完成内容的聚合,极大提高搜索效率,快速定位目标信息">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="font-awesome/4.6.0/css/font-awesome.min.css">
+    <link href="css/fSelect.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <script src="js/jquery.mCustomScrollbar.concat.m.js"></script>
+    <script src="js/fSelect.js"></script>
+    <style type="text/css">
+        input,
+        txtarea,
+        button,
+        a,
+        header,
+        main,
+        footer,
+        div {
+            outline: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        header {
+            width: 100%;
+            height: 50px !important;
+            background: #fff;
+            border-bottom: 1px solid #e6ebef;
+            position: fixed;
+            z-index: 10100;
+            transform: translateZ(0);
+        }
+
+        header button.login {
+            line-height: 22px;
+            color: #4c86fa;
+            letter-spacing: 1px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            transition-property: color
+        }
+
+        header button.login:hover {
+            opacity: 1;
+            color: #3476fa
+        }
+
+        header .logo {
+            position: absolute;
+            left: 10px;
+            top: 10px
+        }
+
+        header .logo,
+        header .logo h1 {
+            width: 81px;
+            display: block;
+            overflow: hidden
+        }
+
+        header .logo img {
+            width: 100%;
+            display: block
+        }
+
+        header .search-box {
+            margin: 0 auto;
+            width: calc(100% - 200px - 2%);
+            max-width: 880px;
+            /*box-sizing:border-box;*/
+            padding-left: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            height: 42px;
+            position: relative;
+            top: 5px;
+        }
+
+        .search-input-box {
+            padding: 0 30px 0 10px;
+            width: 100%;
+            height: 40px;
+            background: #f8f9fa;
+            border: 1px solid #e6ebef;
+            box-sizing: border-box;
+            border-radius: 5px;
+            position: relative
+        }
+
+        .search-input-box input {
+            margin: 8px 0;
+            width: 100%;
+            line-height: 1.5em;
+            box-sizing: border-box;
+            background: transparent;
+            border: none
+        }
+
+        .search-input-box button {
+            width: 20px;
+            height: 20px;
+            background: url("images/search.svg") no-repeat;
+            background-size: 100% 100%;
+            border: none;
+            opacity: .8;
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            cursor: pointer
+        }
+
+        .search-input-box button:hover {
+            opacity: 1
+        }
+
+        .search-keywords {
+            padding: 0 20px;
+            width: 100%;
+            max-height: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: absolute;
+            top: 48px;
+            left: 0;
+            z-index: 10000;
+            transition: .35s ease-in-out
+        }
+
+        .search-keywords.active {
+            max-height: 999px
+        }
+
+        .search-keywords ul {
+            padding: 12px 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e6ebef;
+            overflow: hidden
+        }
+
+        .search-keywords ul li {
+            width: 100%;
+            overflow: hidden
+        }
+
+        .search-keywords ul li a {
+            padding: 0 12px;
+            width: 100%;
+            height: 30px;
+            color: #434b5b;
+            line-height: 30px;
+            box-sizing: border-box;
+            display: block;
+            transition: .15s ease
+        }
+
+        .search-keywords ul .over>a {
+            background-color: #d8e7f5;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .2);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10101;
+            opacity: 0;
+            display: none;
+            transition: .15s ease
+        }
+
+        .modal.active {
+            opacity: 1
+        }
+
+        .modal.quiet {
+            opacity: 0
+        }
+
+        .modal-box {
+            padding: 35px 25px;
+            width: 70%;
+            max-width: 580px;
+            background: #fff;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            display: none;
+            opacity: 0;
+            transition: .2s ease-in-out
+        }
+
+        .modal-box.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-60%)
+        }
+
+        .modal-box.quiet {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-70%)
+        }
+
+        .modal-close {
+            padding: 0 5px;
+            color: #434b5b;
+            line-height: 20px;
+            position: absolute;
+            right: 0;
+            top: 0
+        }
+
+        .modal-title {
+            width: 100%;
+            height: 45px;
+            text-align: center
+        }
+
+        .modal-title a {
+            margin: 0 1em;
+            padding-bottom: 20px;
+            color: #bcc4d5;
+            display: inline-block;
+            position: relative
+        }
+
+        .modal-title a.active {
+            color: #4c86fa
+        }
+
+        .modal-title a.active:after {
+            width: 100%;
+            height: 4px;
+            content: "";
+            background: #4c86fa;
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0
+        }
+
+        .modal-content {
+            width: 100%;
+        }
+
+        .modal-content-box,
+        .modal-content-box form {
+            width: 100%;
+        }
+
+        .modal-content-box span {
+            color: red;
+        }
+
+        .modal-input-item {
+            margin-top: 0px;
+            padding: 0 1em;
+            width: 100%;
+            height: 36px;
+            background: #f8f9fa;
+            border: 1px solid #e6ebef;
+            box-sizing: border-box;
+            border-radius: 5px
+        }
+
+        .modal-input-item input {
+            margin-top: 6px;
+            width: 100%;
+            color: #434b5b;
+            background: transparent;
+            border: none
+        }
+
+        .modal-button {
+            margin-left: 10px;
+            width: 100px;
+            height: 36px;
+            color: #f4f6f8;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 36px;
+            background: #4c86fa;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .graybtn {
+            background: #f4f6f8;
+            color: #000;
+        }
+
+        .modal-footer {
+            margin-top: 20px;
+            width: 100%;
+            height: 42px
+        }
+
+        .modal-footer a {
+            color: #434b5b;
+            line-height: 22px;
+            float: right
+        }
+
+        .modal-footer p,
+        .modal-footer p a {
+            text-align: center;
+            float: none
+        }
+
+        .modal-footer p a {
+            color: #4c86fa
+        }
+
+        .modal-title-back {
+            width: 100%;
+            height: 42px;
+            line-height: 22px;
+            text-align: center
+        }
+
+        .modal-title-back a {
+            padding-left: 22px;
+            color: #4c86fa;
+            background: url("http://oldhorse.net/images/back.svg") left center no-repeat;
+            background-size: auto 20px;
+            float: left
+        }
+
+        .modal-title-back span {
+            display: inline-block;
+            transform: translateX(-50%)
+        }
+
+        .modal-input-sms {
+            position: relative
+        }
+
+        .modal-input-sms input {
+            padding-right: 8em;
+            box-sizing: border-box
+        }
+
+        .modal-input-sms a {
+            color: #4c86fa;
+            position: absolute;
+            right: 12px;
+            top: 6px
+        }
+
+        .modal-content-box .left {
+            float: left;
+            width: 150px;
+            background-color: #fff;
+
+        }
+
+        .modal-content-box .right {
+            float: left;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .modal-content-box .left .select {
+            float: unset;
+            height: 200px;
+            border: 1px solid #e6ebef;
+        }
+
+        .modal-content-box .left .select ul li {
+            float: unset;
+        }
+
+
+        .modal-content-box .right .modal-button {
+            margin-top: 20px;
+        }
+    </style>
+
+    <style type="text/css">
+        *,
+        body,
+        html,
+        nav {
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .clearfix:after,
+        .clearfix:before {
+            display: table;
+            content: " ";
+            clear: both
+        }
+
+        body,
+        html {
+            font: 14px/27px 'Helvetica Neue', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 'Microsoft Yahei', sans-serif;
+            color: #000
+        }
+
+        body,
+        html {
+            height: 100%;
+            overflow: initial
+        }
+
+        iframe {
+            border: 1
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:link,
+        a:visited {
+            color: #5e5e5e;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .vtab {
+            margin: auto;
+            height: 100%;
+        }
+
+        .vtab>ul>li {
+
+            background-color: #fff !important;
+            list-style-type: none;
+            display: block;
+            text-align: center;
+            width: 100%;
+            border-bottom: 1px solid #d9dde1;
+            opacity: .4;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+        }
+
+        .vtab>ul>li>a {
+            writing-mode: tb-rl;
+            -webkit-writing-mode: vertical-rl;
+            margin: 9px 0 0px 2px;
+        }
+
+        .vtab>ul>li.selected {
+            opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+
+            border-right: none;
+            z-index: 10;
+            background-color: #fafafa !important;
+            position: relative;
+            background: 0 0;
+            box-shadow: inset 3px 0 #2cc185;
+            color: #2cc185;
+        }
+
+        .vtab>ul>li.selected>a {
+            margin: 9px 0 0px 4px;
+        }
+
+        .vtab>ul {
+            float: left;
+            text-align: left;
+            display: block;
+            margin: auto 0;
+            padding: 0;
+            position: relative;
+            top: 0px;
+            /*width: 100%;*/
+        }
+
+
+        .sitelist {
+            overflow: auto;
+            height: 100%;
+        }
+
+        .sitelist ul {
+            height: 100%;
+            list-style: none;
+        }
+
+        .sitelist ul li {
+            height: 35px;
+            padding: 5px 10px 5px 5px;
+        }
+
+        .sitelist ul li img {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            padding: 10px
+        }
+
+        .sitelist li.active,
+        .sitelist li:hover {
+            display: block;
+            line-height: 2pc;
+            color: #009688;
+            cursor: pointer;
+            background-color: #d8e7f5;
+        }
+
+        .sitelist li:hover .hover-content {
+            display: block;
+        }
+
+
+        .sitelist li.active {
+            font-weight: 800
+        }
+
+        .active {
+            -webkit-animation: flipInY 2s .5s ease both;
+            -moz-animation: flipInY 2s .5s ease both;
+        }
+
+        .main-content {
+            background-color: #fff;
+            float: left;
+            height: 100%;
+            width: 100%;
+        }
+
+        .leftside {
+            height: calc(100% - 50px);
+            padding-top: 50px;
+        }
+
+        .leftside .vtab {
+            width: 30px;
+            height: 100%;
+            float: left;
+            background-color: #e6ebef;
+        }
+
+        .leftside .navigation {
+            width: 250px;
+            height: 100%;
+            float: left;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .leftside .main-content {
+            background-color: #fff;
+            float: left;
+            height: 100%;
+            width: calc(100% - 250px)
+        }
+
+        .rightside {
+            height: calc(100% - 50px);
+            padding-top: 50px;
+        }
+
+        .rightside .vtab {
+            width: 30px;
+            height: 100%;
+            float: right;
+            background-color: #e6ebef;
+
+        }
+
+        .rightside .navigation {
+            width: 250px;
+            height: 100%;
+            float: right;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .rightside .main-content {
+            background-color: #fff;
+            float: left;
+            height: 100%;
+            width: calc(100% - 250px)
+        }
+
+        .rightside .vtab>ul>li.selected {
+            box-shadow: inset -3px 0px #2cc185;
+        }
+
+        .rightside .sitelist>ul {
+            margin-left: 0px;
+            margin-right: 30px;
+            height: 100%;
+            list-style: none;
+        }
+
+        .bottomside {
+            position: inherit;
+            height: calc(100% - 51px)
+        }
+
+        .bottomside .header {
+            position: inherit;
+        }
+
+        .bottomside .navigation {
+            height: 250px;
+            width: 100%;
+            float: left;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            position: absolute;
+            border-bottom: 1px solid #d9dde1;
+            z-index: 10;
+        }
+
+        .bottomside .nothing {
+            display: block;
+            background-color: #fff;
+            width: 100%;
+            height: calc(100% - 51px);
+            position: absolute;
+            opacity: 0;
+        }
+
+        .bottomside .sitelist {
+            height: 220px;
+        }
+
+        .bottomside .sitelist #websites {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .bottomside .vtab {
+            height: 30px;
+            width: 100%;
+
+            background-color: #e6ebef;
+
+        }
+
+        .bottomside .vtab>ul {
+            list-style: none;
+        }
+
+        .bottomside .vtab>ul>li {
+            padding: 0 5px;
+            float: left;
+            width: auto;
+            height: 29px;
+        }
+
+        .bottomside .vtab>ul>li.selected {
+            box-shadow: inset 0px 3px #2cc185;
+        }
+
+        .bottomside .vtab>ul>li.selected>a {
+            margin: 3px 0 0px 0px;
+        }
+
+        .bottomside .vtab>ul>li>a {
+            -webkit-writing-mode: unset;
+            writing-mode: unset;
+            margin: 9px 0 0px 0px;
+        }
+
+        .menu-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            --icon-width: 24px;
+            position: absolute;
+            right: 20px;
+            top: 13px;
+
+            flex-direction: column;
+            transition: all calc(100ms + var(--transition-time)) cubic-bezier(0.8, 0, 0.33, 1.25);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .menu-btn .line {
+            width: var(--icon-width);
+            background: gray;
+            height: 2px;
+            margin: 3px 0;
+            transition: all calc(var(--transition-time) + 100ms) cubic-bezier(0.9, 0, 0.33, 1);
+        }
+
+        .menu-btn .line__1 {
+            width: var(--icon-width);
+            transform-origin: left;
+        }
+
+        .menu-btn .line__2 {
+            width: var(--icon-width);
+            transform-origin: center;
+        }
+
+        .menu-btn .line__3 {
+            width: var(--icon-width);
+            transform-origin: right;
+        }
+
+        .mCSB_container {
+            margin-right: 0px;
+        }
+
+        #faveriters li.split {
+            font-size: 0px;
+            line-height: 0px;
+            height: 1px;
+            *margin-top: -1px;
+            _margin-top: -1px;
+            overflow: hidden;
+            background: #e5e5e5;
+            padding: 0px 5px;
+            margin: 0px 8px;
+        }
+
+        .fa-plus:before {
+            content: "\f067";
+            font-family: FontAwesome;
+        }
+
+        .addbtn {
+            position: absolute;
+            bottom: 0px;
+            width: 30px;
+            height: 30px;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+            z-index: 2;
+            color: #555;
+        }
+
+
+        .select {
+            width: 100%;
+            overflow: auto;
+        }
+
+        .select ul {
+            list-style: none;
+        }
+
+        .select ul li {
+            padding: 0 5px;
+            float: left;
+            width: auto;
+            height: 29px;
+            margin: 0 0 5px 0;
+        }
+
+        .select>ul>li.selected {
+            box-shadow: inset 0px -2px #4c86fa;
+        }
+
+        .select>ul>li.selected a {
+            color: #4c86fa;
+        }
+
+        .select>ul>li a:hover {
+            color: #4c86fa;
+        }
+
+        .hover-content {
+            float: right;
+            display: none;
+        }
+
+        .hover-content img {
+            padding: 10px 0 10px 5px !important;
+        }
+
+        .modify {
+            padding: 13px 0 10px 5px !important;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .template1 iframe {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .template2 iframe {
+            width: 50%;
+            height: 100%;
+            float: left;
+        }
+
+        .template3 iframe {
+            width: 33.3%;
+            height: 100%;
+            float: left;
+        }
+
+        .template4 iframe {
+            width: 50%;
+            height: 50%;
+            float: left;
+        }
+
+        .barmenu {
+            position: absolute;
+            bottom: 0px;
+        }
+
+        .bottomside .barmenu {
+            top: 0px;
+            right: 0px;
+        }
+
+        .bottomside .addbtn {
+            float: right;
+            position: unset;
+        }
+
+        .bottomside .funcmenu {
+            top: 30px;
+            float: right;
+            right: 0px;
+            bottom: unset;
+        }
+
+        .funcmenu {
+            z-index: 20000;
+            bottom: 30px;
+            position: absolute;
+            background-color: #fff;
+        }
+
+        .funcmenu li {
+            padding-left: 5px;
+            padding-right: 5px;
+            height: 30px;
+        }
+
+        .funcmenu li.active,
+        .funcmenu li:hover {
+            display: block;
+            color: #009688;
+            cursor: pointer;
+            background-color: #d8e7f5;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <header class="">
+        <a href="" class="logo">
+            <h2>
+                GDUT
+            </h2>
+        </a>
+        <div class="search-box">
+            <div id="search-input-box" class="search-input-box">
+                <input id="keywords" type="search" autocomplete="off" value="" placeholder="输入关键字搜索">
+                <button onclick="search()"></button>
+            </div>
+            <div id="search-keywords" class="search-keywords">
+                <ul></ul>
+            </div>
+        </div>
+        <div class="menu-btn">
+            <div class="line line__1"></div>
+            <div class="line line__2"></div>
+            <div class="line line__3"></div>
+        </div>
+
+    </header>
+
+
+    <div id="content" class="clearfix">
+        <div class="navigation" tabindex="0" outline="0&quot;" hidefocus="true">
+
+            <div id="vtab" class="vtab">
+                <ul id="cur_subtype" style="">
+                </ul>
+
+                <a class="addbtn fa-plus"></a>
+                <div class="funcmenu none">
+                    <ul>
+                        <li name="addsite"><a href="javascript:void(0);">添加站点源</a></li>
+                        <li name="addmultiple"><a href="javascript:void(0);">添加多窗口搜索</a></li>
+                        <li name="typemgr"><a href="javascript:void(0);">分组管理</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="sitelist">
+                <ul id="faveriters">
+                </ul>
+                <ul id="websites">
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="nothing">
+            </div>
+            <div class="content template1">
+                <iframe id="engine" src="help.html" frameborder="0" marginwidth="0" marginheight="0"
+                    allowtransparency="true" style="background-color:#fff"></iframe>
+            </div>
+            <div class="content template2 none">
+                <iframe id="engine1" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine2" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+            </div>
+            <div class="content template3 none">
+                <iframe id="engine1" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine2" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine3" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+            </div>
+            <div class="content template4 none">
+                <iframe id="engine1" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine2" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine3" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+                <iframe id="engine4" src="" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"
+                    style="background-color:#fff"></iframe>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal">
+        <div id="addsite-modal" class="modal-box">
+            <a href="javascript:void(0);" class="modal-close">x</a>
+            <div class="modal-title">
+                <h2>添加站点源</h2>
+            </div>
+            <div class="modal-content">
+                <div class="modal-content-box">
+                    <form>
+                        <a>站点显示名称(必填)</a><span id="site-name-req" class="none">*</span>
+                        <div class="modal-input-item">
+                            <input name="site-name" type="text" placeholder="例如：谷歌" autocomplete="off" value="test">
+                        </div>
+                        <a>站点描述(可选)</a>
+                        <div class="modal-input-item">
+                            <input name="site-memo" type="text" placeholder="例如：全球最大的搜索引擎" autocomplete="off">
+                        </div>
+                        <a>站点地址,无关键字搜索时进入的地址(必填)</a><span id="site-url-req" class="none">*</span>
+                        <div class="modal-input-item">
+                            <input name="site-url" type="text" placeholder="例如：https://google.com" autocomplete="off"
+                                value="https://baidu.com">
+                        </div>
+                        <a>关键字搜索地址,地址中请用{keywords}代表搜索关键字(必填)</a><span id="site-query-req" class="none">*</span>
+                        <div class="modal-input-item">
+                            <input name="site-query" type="text" placeholder="https://www.baidu.com/s?wd={keywords}"
+                                autocomplete="off" value="https://www.baidu.com/s?wd={keywords}">
+                        </div>
+                        <a>网站图标地址(必填)</a><span id="site-ico-req" class="none">*</span>
+                        <div class="modal-input-item">
+                            <input name="site-ico" type="text" placeholder="https://www.baidu.com/favicon.ico"
+                                autocomplete="off" value="https://www.baidu.com/favicon.ico">
+                        </div>
+                        <a>所在分组</a>
+                        <div class="select">
+                            <ul>
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button class="modal-button">保存</button>
+                        <button class="modal-button graybtn">删除</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="addmultiple-modal" class="modal-box">
+            <a href="javascript:void(0);" class="modal-close">x</a>
+            <div class="modal-title">
+                <h2>添加多窗口搜索</h2>
+            </div>
+            <div class="modal-content">
+                <div class="modal-content-box">
+                    <form>
+                        <a>显示名称(必填)</a><span id="multiple-name-req" class="none">*</span>
+                        <div class="modal-input-item">
+                            <input name="multiple-name" type="text" placeholder="例如：谷歌，百度" autocomplete="off">
+                        </div>
+                        <a>描述(可选)</a>
+                        <div class="modal-input-item">
+                            <input name="multiple-memo" type="text" placeholder="例如：谷歌，百度同时搜索" autocomplete="off">
+                        </div>
+                        <a>同时打开的站点，多选，2-4个(必填)</a><span id="multiple-sites-req" class="none">*</span>
+                        <div class="container">
+                            <select class="typeselecter" multiple="multiple">
+                            </select>
+                        </div>
+
+                        <a>所在分组</a>
+                        <div class="select">
+                            <ul>
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button class="modal-button">保存</button>
+                        <button class="modal-button graybtn">删除</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="typemgr-modal" class="modal-box">
+            <a href="javascript:void(0);" class="modal-close">x</a>
+            <div class="modal-title">
+                <h2>分组管理</h2>
+            </div>
+            <div class="modal-content">
+                <div class="modal-content-box">
+
+                    <div class="select">
+                        <ul>
+                        </ul>
+                    </div>
+
+
+                    <div class="right">
+
+                        <div class="modal-input-item">
+                            <input name="typename" type="text" placeholder="" autocomplete="off">
+                        </div>
+                        <span id="typemgr-req" class=""></span>
+                        <button class="modal-button">保存</button>
+                        <button class="modal-button graybtn">删除</button>
+                    </div>
+                    </form>
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script type='text/javascript'>
+        jQuery.fn.isChildAndSelfOf = function (b) {
+            return (this.closest(b).length > 0);
+        };
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return decodeURI(pair[1]); }
+            }
+            return "";
+        }
+        /**
+        * cookie中存值
+        * */
+        function setCookie(name, value) {
+
+            var days = 365; //定义一天
+            var exp = new Date();
+            exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
+            // 写入Cookie, toGMTString将时间转换成字符串
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+
+        };
+
+        /**
+        * cookie中取值
+        * */
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)"); //匹配字段
+            if (arr = document.cookie.match(reg)) {
+                return unescape(arr[2]);
+            } else {
+                return "";
+            }
+        };
+
+        function browserRedirect() {
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
+                //跳转移动端页面
+                $(".navigation").addClass('hide');
+                $(".nothing").css("display", "none");
+                $("#content").addClass('bottomside');
+                $("header").addClass('bottomside');
+            } else {
+                //跳转pc端页面
+                $("#content").addClass('leftside');
+            }
+        }
+        browserRedirect();
+
+
+
+        var types = [{ "name": "网页", "user": false }, { "name": "图片", "user": false }, { "name": "百科", "user": false }, { "name": "文库", "user": false }, { "name": "学术", "user": false }, { "name": "视频", "user": false }/*,{"name":"多窗口","user":false}*/];
+        //["搜索引擎名称","描述","搜索引擎首页","搜索引擎搜索地址","图片地址",是否不展示搜索引擎给用户false或true,是否允许用户自定义搜索引擎设置false或true],
+        var sites = [
+            /* 网页搜索引擎 */
+            [
+                ["百度", "百度一下", "https://www.baidu.com", "https://www.baidu.com/s?wd={keywords}", "./images/ico/baidu2.ico", false, true],
+                ["360", "百度一下", "https://www.so.com", "https://www.so.com/s?q={keywords}", "./images/ico/360.ico", false, true],
+                ["搜狗", "搜狗一下", "https://www.sogou.com", "https://www.sogou.com/sogou?query={keywords}", "./images/ico/sougou.ico", false, true],
+                ["必应", "微软bing搜索", "https://cn.bing.com", "https://cn.bing.com/search?q={keywords}", "./images/ico/bing.ico", false, true],
+                ["微信", "微信公众号文章搜索", "https://weixin.sogou.com/weixin", "https://weixin.sogou.com/weixin?type=2&query={keywords}", "./images/ico/wechat.ico", false, true],
+                ["神马", "神马搜索", "https://quark.sm.cn/", "https://quark.sm.cn/s?q={keywords}", "./images/ico/shenma.jpg", false, true],
+                ["头条", "头条搜索", "https://so.toutiao.com/", "https://so.toutiao.com/search?keyword={keywords}", "./images/ico/toutiao.ico", false, true],
+                ["二窗搜索", "聚合二搜", "multiple", "百度;必应", "template2", false, true],
+                ["三窗搜索", "聚合三搜", "multiple", "百度;360;必应", "template3", false, true],
+                ["四窗搜索", "聚合四搜", "multiple", "百度;搜狗;360;必应", "template4", false, true],
+            ],
+
+
+            /* 图片搜索引擎 */
+            [
+                ["百度图片", "百度图片搜索", "https://image.baidu.com", "https://image.baidu.com/search/index?tn=baiduimage&fm=result&ie=utf-8&word={keywords}", "./images/ico/baidu.ico", false, false],
+                ["bing图片", "bing图片搜索", "https://cn.bing.com/images/", "https://cn.bing.com/images/results.aspx?q={keywords}", "./images/ico/bing.ico", false, false],
+                ["360图片", "360图片搜索", "https://image.so.com/", "https://image.so.com/i?q={keywords}", "./images/ico/360.ico", false, false],
+                ["搜狗图片", "搜狗图片搜索", "https://image.baidu.com", "https://image.baidu.com/search/index?tn=baiduimage&fm=result&ie=utf-8&word={keywords}", "./images/ico/sougou.ico", false, false],
+                ["四窗", "聚合四搜", "multiple", "百度图片;bing图片;360图片;搜狗图片", "template4", false, true],
+            ],
+
+
+            /* 百科搜索 */
+            [
+                ["百度百科", "百度百科搜索", "https://baike.baidu.com/", "https://baike.baidu.com/item/{keywords}", "./images/ico/baidu2.ico", false, false],
+                ["搜狗百科", "搜狗百科搜索", "https://www.sogou.com/sogou?query=百科&ie=utf8&insite=baike.sogou.com", "https://www.sogou.com/sogou?query={keywords}&ie=utf8&insite=baike.sogou.com", "./images/ico/sougou.ico", false, false],
+                ["MBA智库", "MBA智库百科搜索", "https://wiki.mbalib.com/wiki/", "https://wiki.mbalib.com/wiki/Special:Search?search={keywords}", "./images/ico/mbabaike.ico", false, false],
+                ["秒懂百科", "秒懂百科搜索", "https://www.baike.com/", "https://www.baike.com/search?keyword={keywords}", "./images/ico/miaodongbaike.ico", false, false],
+            ],
+
+
+            /*文库搜索*/
+            [
+                ["百度文库", "百文库搜索", "https://wenku.baidu.com/", "https://wenku.baidu.com/search?word={keywords}", "./images/ico/baidu2.ico", false, false],
+                ["道客巴巴", "道客巴巴文库搜索", "https://www.doc88.com/", "https://www.doc88.com/tag/{keywords}", "./images/ico/daoke88.ico", false, false],
+                ["豆丁文库", "豆丁文库搜索", "https://www.docin.com/", "https://www.docin.com/search.do?nkey={keywords}", "./images/ico/doudinwenku.ico", false, false],
+                ["文档大全", "文档大全文库搜索", "http://www.1mpi.com/", "http://www.1mpi.com/search/{keywords}", "./images/ico/wendangdaquan.ico", false, false],
+            ],
+
+
+            /*学术搜索*/
+            [
+                ["百度学术", "百度学术搜索", "https://xueshu.baidu.com", "https://xueshu.baidu.com/s?wd={keywords}", "./images/ico/baidu2.ico", false, false],
+                ["微软学术", "微软学术搜索", "https://cn.bing.com", "https://cn.bing.com/academic/search?q={keywords}", "./images/ico/bing2.ico", false, false],
+                ["爱学术", "爱学术搜索", "https://www.ixueshu.com/", "https://www.ixueshu.com/search/index.html?search_type=&q={keywords}", "./images/ico/aixueshu.ico", false, false],
+                ["X-MOL", "X-MOL学术搜索", "https://www.x-mol.com/", "https://www.x-mol.com/paper/search/q?option={keywords}", "./images/ico/x-mol.ico", false, false],
+                ["搜狗学术", "搜狗学术搜索", "https://scholar.sogou.com/", "https://scholar.sogou.com/xueshu?ie=utf-8&query={keywords}", "./images/ico/sougou.ico", false, false],
+            ],
+
+
+            /*视频搜索*/
+            [
+                ["bilibili", "B站视频搜索", "https://search.bilibili.com/", "https://search.bilibili.com/all?keyword={keywords}", "./images/ico/bilibili.ico", false, false],
+                ["爱奇艺", "爱奇艺视频搜索", "https://so.iqiyi.com/so/", "https://so.iqiyi.com/so/q_{keywords}", "./images/ico/iqiyi.jpg", false, false],
+                ["腾讯视频", "腾讯视频搜索", "https://v.qq.com/x/search/", "https://v.qq.com/x/search/?q={keywords}", "./images/ico/tengxunvideo.ico", false, false],
+                ["必应视频", "B站视频搜索", "https://cn.bing.com/video/", "https://cn.bing.com/video/results.aspx?q={keywords}", "./images/ico/bing2.ico", false, false],
+            ],
+
+
+            /*
+            [
+                ["二窗","百度一下","multiple","百度;搜狗","template2",false,false],
+                ["三窗","百度一下","multiple","百度;搜狗;s360","template3",false,false],
+                ["四窗","百度一下","multiple","百度;搜狗;s360;必应","template4",false,false],
+            ]
+            */
+        ];
+
+
+
+
+        /*
+        function tojson(){
+            var arr = [[]];
+                for(index in types){
+                    var items = sites[index];
+                    arr.push([]);
+                    for(i in items){
+                        var json = {};
+                        json.name = items[i][0];
+                        json.memo = items[i][1];
+                        json.url = items[i][2];
+                        json.query = items[i][3];
+                        json.ico = items[i][4];
+                        json.favorite = items[i][5];
+                        json.user = items[i][6];
+                        arr[index].push(JSON.stringify(json));
+                    }
+                }
+                var sd = JSON.stringify( arr );
+            }
+        tojson();
+        
+        var sd = JSON.stringify( sites );
+        jsarr=JSON.parse( sd );
+        sd = JSON.stringify( jsarr );
+        */
+        function hasSametypename(name) {
+            for (i in types) {
+                if (types[i].name === name) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function gettypeindex(name) {
+            for (i in types) {
+                if (types[i].name === name) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        function getwebsiteindex(name) {
+            for (index in types) {
+                var items = sites[index];
+                for (i in items) {
+                    if (items[i][0] === name) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+        function getwebsiteindex(index, name) {
+            var items = sites[index];
+            for (i in items) {
+                if (items[i][0] === name) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        function bulidtype() {
+
+            var $sub_ui = $('#cur_subtype');
+            $sub_ui.empty();
+            //sort
+            var sortstr = getCookie("sort_type");
+            var items = sortstr.split(';');
+
+            for (i in types) {
+                var has = false;
+                for (j in items) {
+                    if (types[i].name === items[j]) {
+                        has = true;
+                        break;
+                    }
+                }
+                if (!has) {
+                    items.push(types[i].name);
+                }
+            }
+
+            for (var num in items) {
+                i = gettypeindex(items[num]);
+                if (i < 0) continue;
+                var $newElement = $('<li draggable="true"><a href="javascript:;" >' + types[i].name + '</a></li>');
+                $newElement.attr("typeindex", i);
+
+                $sub_ui.append($newElement);
+
+            }
+
+            var $items = $('#vtab>ul>li');
+            $items.eq(0).addClass('selected');
+            $items.click(function () {
+                $items.removeClass('selected');
+                $(this).addClass('selected');
+
+                selecttabtype($(this).attr("typeindex"));
+            });
+        }
+        function bulidfavorites() {
+            $faveriters = $('#faveriters');
+            $faveriters.empty();
+            var favorite = getCookie("favorite");
+            if (favorite == "") return;
+            var items = favorite.split(';');
+            for (i in items) {
+                var name = items[i];
+                if (name == "")
+                    continue;
+
+                var has = false;
+                var typeindex = -1;
+                var subindex = -1;
+                for (var t in types) {
+                    var site = sites[t];
+                    for (var index in site) {
+                        if (site[index][0] == name) {
+                            site[index][5] = true
+                            has = true;
+                            typeindex = t;
+                            subindex = index;
+                            break;
+                        }
+                    }
+                    if (has) break;
+                }
+                if (!has) continue;
+
+                var $newElement = null;
+                if (sites[typeindex][subindex][2] == "multiple")
+                    $newElement = $('<li draggable="true"><img src="./images/4.jpg"><span>' + sites[typeindex][subindex][0] + '</span><a class="hover-content favorite"><img src="./images/on.svg"></a><i class="hover-content fa fa-cog fa-lg modify"></i></li>');
+                else if (sites[typeindex][subindex][6] == true)
+                    $newElement = $('<li draggable="true"><img src="' + sites[typeindex][subindex][4] + '"><span>' + sites[typeindex][subindex][0] + '</span><a class="hover-content favorite"><img src="./images/on.svg"></a><i class="hover-content fa fa-cog fa-lg modify"></i></li>');
+                else
+                    $newElement = $('<li draggable="true"><img src="' + sites[typeindex][subindex][4] + '"><span>' + sites[typeindex][subindex][0] + '</span><a class="hover-content favorite"><img src="./images/on.svg"></a></li>');
+                $newElement.attr("typeindex", typeindex);
+                $newElement.attr("index", subindex);
+                $newElement.click(function (event) {
+
+                    var typeindex = $(this).attr("typeindex");
+                    webindex = $(this).attr("index");
+                    var site = sites[typeindex][webindex];
+                    if ($(event.target).isChildAndSelfOf(".favorite")) {
+                        site[5] = false;
+                        var favorite = getCookie("favorite");
+                        var items = favorite.split(';');
+                        favorite = "";
+                        for (i in items) {
+                            var name = items[i];
+                            if (name == "")
+                                continue;
+                            if (name == site[0])
+                                continue;
+
+                            favorite += ";" + name;
+                        }
+                        if (favorite.length > 0)
+                            favorite = favorite.substr(1);
+                        setCookie("favorite", favorite);
+                        //重新加载
+                        bulidfavorites();
+                        selecttabtype($('#cur_subtype>li.selected').attr("typeindex"));
+                    }
+                    else if ($(event.target).isChildAndSelfOf(".modify")) {
+                        $(".modal").attr("modify", true);
+                        $(".modal").attr("typeindex", typeindex);
+                        $(".modal").attr("siteindex", webindex);
+
+                        if (site[2] == "multiple") {
+                            $(".funcmenu li[name='addmultiple']").click();
+                        }
+                        else {
+                            $(".funcmenu li[name='addsite']").click();
+                        }
+                    }
+                    else {
+                        $('#websites>li').removeClass("active");
+                        var $items = $('#faveriters>li');
+                        $items.removeClass("active");
+                        $items.eq($(this).index()).addClass('active');
+
+                        selectwebsite(typeindex, webindex);
+                    }
+                });
+
+                $faveriters.append($newElement);
+
+
+            }
+            if (items.length > 0)
+                $faveriters.append('<li class="split" ></li>');
+
+        }
+        function selecttabtype(index) {
+            var $websites = $('#websites');
+            $websites.empty();
+            var items = sites[index];
+            //sort
+            var sortstr = getCookie("sort_websits_" + index);
+            var sortitems = sortstr.split(';');
+            var sort = [];
+
+            for (i in items) {
+                var has = false;
+                for (j in sortitems) {
+                    if (items[i][0] === sortitems[j]) {
+                        has = true;
+                        break;
+                    }
+                }
+                if (!has) {
+                    sortitems.push(items[i][0]);
+                }
+            }
+
+
+            for (var num in sortitems) {
+                var i = getwebsiteindex(index, sortitems[num]);
+                if (i < 0) continue;
+
+                if (items[i][5] == true)
+                    continue;
+
+                var $newElement = null;
+                if (items[i][2] == "multiple")
+                    $newElement = $('<li draggable="true"><img src="./images/4.jpg"><span>' + items[i][0] + '</span><a class="hover-content favorite"><img src="./images/off.svg"></a><i class="hover-content fa fa-cog fa-lg modify"></i></li>');
+                else if (items[i][6] == true)
+                    $newElement = $('<li draggable="true"><img src="' + items[i][4] + '"><span>' + items[i][0] + '</span><a class="hover-content favorite"><img src="./images/off.svg"></a><i class="hover-content fa fa-cog fa-lg modify"></i></li>');
+                else
+                    $newElement = $('<li draggable="true"><img src="' + items[i][4] + '"><span>' + items[i][0] + '</span><a class="hover-content favorite"><img src="./images/off.svg"></a></li>');
+                $newElement.attr("typeindex", index);
+                $newElement.attr("index", i);
+                $newElement.click(function (event) {
+                    var typeindex = $(this).attr("typeindex");
+                    webindex = $(this).attr("index");
+                    var site = sites[typeindex][webindex];
+                    if ($(event.target).isChildAndSelfOf(".favorite")) {
+                        var favorite = getCookie("favorite");
+                        favorite += ";" + site[0];
+                        setCookie("favorite", favorite);
+                        //重新加载
+                        bulidfavorites();
+                        selecttabtype(typeindex);
+                    }
+                    else if ($(event.target).isChildAndSelfOf(".modify")) {
+                        $(".modal").attr("modify", true);
+                        $(".modal").attr("typeindex", typeindex);
+                        $(".modal").attr("siteindex", webindex);
+
+                        if (site[2] == "multiple") {
+                            $(".funcmenu li[name='addmultiple']").click();
+                        }
+                        else {
+                            $(".funcmenu li[name='addsite']").click();
+                        }
+                    }
+                    else {
+                        $('#faveriters>li').removeClass("active");
+                        var $items = $('#websites>li');
+                        $items.removeClass("active");
+                        $items.eq($(this).index()).addClass('active');
+                        selectwebsite(typeindex, webindex);
+                    }
+                });
+
+                $websites.append($newElement);
+            }
+
+        }
+        function getnameurl(name, keyword) {
+            for (var i in types) {
+                for (var j in sites) {
+                    if (sites[i][j][0] === name)
+                        return keyword ? sites[i][j][3] : sites[i][j][2];
+                }
+            }
+            return "";
+        }
+
+        function realsearch(index, webindex, kws) {
+            var site = sites[index][webindex];
+            if (site[2] === "multiple") {
+                var items = site[3].split(';');
+                var template = ".template" + items.length;
+                for (i in items) {
+                    var url = getnameurl(items[i], kws !== "");
+                    var id = parseInt(i) + 1;
+                    var engine = template + " #engine" + id;
+                    url = url.replace(/{keywords}/g, kws);
+                    $(engine).attr("src", url);
+                }
+
+                $(".template1").addClass('none');
+                $(".template2").addClass('none');
+                $(".template3").addClass('none');
+                $(".template4").addClass('none');
+                $(template).removeClass('none');
+
+            }
+            else {
+                if (kws == "")
+                    url = site[2];
+                else
+                    url = site[3];
+                url = url.replace(/{keywords}/g, kws);
+                $("#engine").attr("src", url);
+
+                $(".template1").removeClass('none');
+                $(".template2").addClass('none');
+                $(".template3").addClass('none');
+                $(".template4").addClass('none');
+            }
+        }
+        function selectwebsite(index, webindex) {
+
+            var kws = $("#keywords").val();
+
+            realsearch(index, webindex, kws);
+            if ($("header").hasClass('bottomside')) {
+                $(".navigation").addClass('hide');
+                $(".nothing").css("display", "none");
+            }
+
+        }
+        function search() {
+            var kws = $("#keywords").val();
+            if (kws == '')
+                return;
+
+            var $selitem = $('#faveriters>li.active');
+            if (!$selitem[0])
+                $selitem = $('#websites>li.active');
+            if ($selitem[0]) {
+                webindex = $selitem.attr("index");
+                index = $selitem.attr("typeindex");
+            }
+            else
+                webindex = -1;
+            if (webindex < 0) {
+                var $items = $('#faveriters>li');
+                if (!$items[0]) {
+                    $items = $('#websites>li');
+                }
+                index = $items.eq(0).attr("typeindex");
+                webindex = $items.eq(0).attr("index");
+                $items.eq(0).addClass('active');
+            }
+            realsearch(index, webindex, kws);
+        }
+
+        //读自定义数据
+        var str = getCookie("usertypes");
+        if (str !== "") {
+            var usertypes = JSON.parse(str);
+            let temp = types.concat(usertypes);
+            types = temp;
+            for (i in usertypes) {
+                sites.push([]);//放一个空数组，预防该组下没站点数据而导致出差
+            }
+        }
+
+        for (index in types) {
+            str = getCookie("usersites_" + index);
+            if (str === "")
+                continue;
+            tempsites = JSON.parse(str);
+            if (tempsites.length > 0) {
+                let temp = sites[index].concat(tempsites);
+                sites[index] = temp;
+            }
+        }
+
+        bulidtype();
+        bulidfavorites();
+        var first = $('#cur_subtype li').attr("typeindex");
+        selecttabtype(first);
+
+        var kw = getQueryVariable("kw");
+        if (kw != "") {
+            $("#keywords").attr("value", kw);
+            search();
+        }
+
+
+        $(".menu-btn").click(function () {
+
+            if ($(".navigation").hasClass('hide')) {
+                $(".navigation").removeClass('hide');
+                if ($("#content").hasClass('bottomside'))
+                    $(".nothing").css("display", "block");
+                else
+                    $(".main-content").css("width", "calc(100% - 250px)");
+            }
+            else {
+                $(".navigation").addClass('hide');
+                if ($("#content").hasClass('bottomside'))
+                    $(".nothing").css("display", "none");
+                else
+                    $(".main-content").css("width", "100%");
+            }
+
+        });
+
+
+
+        $('body').bind('click', function (event) {
+            if (!$("#content").hasClass('bottomside'))
+                return;
+            if ($(event.target).isChildAndSelfOf(".navigation")) return;
+            if ($(event.target).isChildAndSelfOf(".menu-btn")) return;
+
+            $(".navigation").addClass('hide');
+            $(".nothing").css("display", "none");
+
+        });
+
+        (function ($) {
+            $(window).load(function () {
+                $(".sitelist").mCustomScrollbar({
+                    mouseWheel: true,
+                    scrollButtons: {
+                        enable: false
+                    },
+                    advanced: {
+                        updateOnContentResize: true
+                    }
+                });
+            });
+        })(jQuery);
+
+        $(document).ready(function () {
+
+
+        });
+    </script>
+
+    <script>
+
+        $(".addbtn").hover(function () {
+            $(".funcmenu").removeClass('none');
+        }, function () {
+            $(".funcmenu").addClass('none');
+        });
+        $(".funcmenu").hover(function () {
+            $(".funcmenu").removeClass('none');
+        }, function () {
+            $(".funcmenu").addClass('none');
+        });
+
+
+        $(".funcmenu li").click(function () {
+            $(".modal").addClass('active');
+            $(".modal").css("display", "block");
+            var name = $(this).attr("name");
+            if (name == "addsite" || name == "addmultiple") {
+                var ulname = "";
+                if (name == "addsite")
+                    ulname = "#addsite-modal";
+                else
+                    ulname = "#addmultiple-modal";
+
+                $ul = $(ulname + " .select ul");
+                $ul.empty();
+                for (var i in types) {
+                    var $newElement = $('<li><a href="javascript:;" >' + types[i].name + '</a></li>');
+                    $newElement.attr("typeindex", i);
+                    $ul.append($newElement);
+
+                }
+                $(ulname + " .select li").eq(0).addClass("selected");
+                $(ulname + " .select li").click(function () {
+                    $(ulname + " .select li").removeClass('selected');
+                    $(this).addClass("selected");
+                });
+
+            }
+            if (name == "addsite") {
+                $("#addsite-modal").addClass('active');
+                $("#addsite-modal").css("display", "block");
+
+                $("#addsite-modal input[name='site-name']").val("");
+                $("#addsite-modal input[name='site-memo']").val("");
+                $("#addsite-modal input[name='site-url']").val("");
+                $("#addsite-modal input[name='site-query']").val("");
+                $("#addsite-modal input[name='site-ico']").val("");
+                $("#addsite-modal .graybtn").addClass('none');
+
+                if ($(".modal").attr("modify") == "true") {
+                    $("#addsite-modal .graybtn").removeClass('none');
+                    $("#addsite-modal .modal-title h2").html("编辑站点源");
+                    var typeindex = $(".modal").attr("typeindex");
+                    var site = sites[parseInt(typeindex)][parseInt($(".modal").attr("siteindex"))];
+                    $("#addsite-modal input[name='site-name']").val(site[0]);
+                    $("#addsite-modal input[name='site-memo']").val(site[1]);
+                    $("#addsite-modal input[name='site-url']").val(site[2]);
+                    $("#addsite-modal input[name='site-query']").val(site[3]);
+                    $("#addsite-modal input[name='site-ico']").val(site[4]);
+
+                    $("#addsite-modal .select ul li").removeClass("selected");
+                    $("#addsite-modal .select ul li:eq(" + typeindex + ")").addClass("selected");
+                }
+            }
+            else if (name === "addmultiple") {
+                var html = '';
+                for (index in types) {
+                    var items = sites[index];
+                    html += '<optgroup label="' + types[index].name + '">';
+                    for (i in items) {
+                        html += '<option value="' + items[i][0] + '">' + items[i][0] + '</option>';
+                    }
+                    html += '</optgroup>';
+                }
+                $('.typeselecter').html(html);
+                $('.typeselecter').fSelect();
+                $('.fs-optgroup .fs-option').removeClass("selected");
+                $("#addmultiple-modal").addClass('active');
+                $("#addmultiple-modal .graybtn").addClass('none');
+                $("#addmultiple-modal").css("display", "block");
+
+
+                $("#addmultiple-modal input[name='multiple-name']").val("");
+                $("#addmultiple-modal input[name='multiple-memo']").val("");
+                $("#addmultiple-modal .fs-label").html("Select some options");
+
+                if ($(".modal").attr("modify") == "true") {
+                    $("#addmultiple-modal .graybtn").removeClass('none');
+                    $("#addmultiple-modal .modal-title h2").html("编辑多窗口搜索");
+                    var typeindex = $(".modal").attr("typeindex");
+                    var site = sites[parseInt(typeindex)][parseInt($(".modal").attr("siteindex"))];
+                    $("#addmultiple-modal input[name='multiple-name']").val(site[0]);
+                    $("#addmultiple-modal input[name='multiple-memo']").val(site[1]);
+                    $("#addmultiple-modal .fs-label").html(site[3]);
+                    $("#addmultiple-modal .select ul li").removeClass("selected");
+                    $("#addmultiple-modal .select ul li:eq(" + typeindex + ")").addClass("selected");
+                    var items = site[3].split(';');
+                    for (var i in items) {
+                        $('.fs-optgroup .fs-option[data-value="' + items[i] + '"]').addClass("selected");
+                    }
+                }
+            }
+            else if (name === "typemgr") {
+
+                $ul = $("#typemgr-modal .select ul");
+                $ul.empty();
+                for (var i in types) {
+                    if (!types[i].user)
+                        continue;
+                    var $newElement = $('<li><a href="javascript:;" >' + types[i].name + '</a></li>');
+                    $ul.append($newElement);
+
+                }
+                $("#typemgr-modal input[name='typename']").val("");
+                $ul.append('<li class="fa-plus" style="cursor:pointer;" ></li>');
+
+                $("#typemgr-modal .select li").click(function () {
+                    if (!$(this).hasClass("fa-plus")) {
+                        $("#typemgr-modal .select li").removeClass('selected');
+                        $(this).addClass("selected");
+
+                        $("#typemgr-modal input[name='typename']").val($(this).children('a').text());
+                    }
+                });
+
+                $("#typemgr-modal .select .fa-plus").click(function () {
+                    var name = "分组";
+                    var newname = name;
+                    var i = 0;
+                    while (gettypeindex(newname) >= 0) {
+                        i++;
+                        newname = "分组" + i;
+                    }
+                    types.push({ "name": newname, "user": true });
+                    sites.push([]);
+                    var index = gettypeindex(newname);
+                    var $newElement = $('<li><a href="javascript:;" >' + newname + '</a></li>');
+                    $ul = $("#typemgr-modal .select ul li");
+                    $newElement.insertBefore($ul.eq($ul.length - 1));
+                    $newElement.click(function () {
+                        $("#typemgr-modal .select li").removeClass('selected');
+                        $(this).addClass("selected");
+
+                        $("#typemgr-modal input[name='typename']").val($(this).children('a').text());
+                    });
+                    $newElement.click();
+                    $(".modal-box.active").attr('changed', true);
+                });
+
+                $("#typemgr-modal").addClass('active');
+                $("#typemgr-modal").css("display", "block");
+            }
+        });
+
+        $(".modal-button").click(function (n) {
+            var modal = $(".modal-box.active").attr('id');
+            var name = $(this).text();
+            if (modal == "typemgr-modal") {
+                $("#typemgr-req").addClass("none");
+                var $selitem = $("#typemgr-modal .select ul li.selected");
+                if ($selitem.length < 0)
+                    return;
+
+                var text = $("#typemgr-modal input[name='typename']").val();
+                if (text == "") {
+                    $("#typemgr-req").val("不能为空");
+                    $("#typemgr-req").removeClass("none");
+                    return;
+                }
+                var oldtext = $selitem.children('a').text();
+                if (text !== oldtext) {
+                    if (gettypeindex(text) >= 0) {
+                        $("#typemgr-req").val("已有该名称的类型");
+                        $("#typemgr-req").removeClass("none");
+                        return;
+                    }
+
+                }
+                var typeindex = gettypeindex(oldtext);
+                if (name == "保存") {
+                    if (types[typeindex] !== text) {
+                        var sortstr = getCookie("sort_type");
+                        sortstr = sortstr.replace(types[typeindex], text);
+                        setCookie("sort_type", sortstr);
+                    }
+
+                    $selitem.children('a').html(text);
+                    types[typeindex] = { "name": text, "user": true };
+                    $(".modal-box.active").attr('changed', true);
+                }
+                else if (name == "删除") {
+                    if (sites[typeindex].length > 0) {
+                        alert("请先删除该分组下的站点");
+                        return;
+                    }
+                    types.splice(typeindex, 1);
+                    sites.splice(typeindex, 1);
+                    $("#typemgr-modal .select ul li.selected").remove();
+                    $("#typemgr-modal input[name='typename']").attr("value", "");
+                    $(".modal-box.active").attr('changed', true);
+                }
+            }
+            if (modal == "addsite-modal") {
+                if (name == "删除") {
+                    var oldtypeindex = parseInt($(".modal").attr("typeindex"));
+                    var webindex = parseInt($(".modal").attr("siteindex"));
+                    sites[oldtypeindex].splice(webindex, 1);
+
+                    $(".modal-box.active").attr('changed', true);
+                    $(".modal-close").click();
+                    return;
+                }
+                $("#addsite-modal span").addClass("none");
+                if ($("#addsite-modal input[name='site-name']").val() == "") {
+                    $("#site-name-req").removeClass("none");
+                    return;
+                }
+                if ($("#addsite-modal input[name='site-url']").val() == "") {
+                    $("#site-url-req").removeClass("none");
+                    return;
+                }
+                if ($("#addsite-modal input[name='site-query']").val() == "") {
+                    $("#site-query-req").removeClass("none");
+                    return;
+                }
+                if ($("#addsite-modal input[name='site-ico']").val() == "") {
+                    $("#site-ico-req").removeClass("none");
+                    return;
+                }
+
+                var typeindex = $("#addsite-modal .select ul li.selected").attr('typeindex');
+                var site = [];
+                site[0] = $("#addsite-modal input[name='site-name']").val();
+                site[1] = $("#addsite-modal input[name='site-memo']").val();
+                site[2] = $("#addsite-modal input[name='site-url']").val();
+                site[3] = $("#addsite-modal input[name='site-query']").val();
+                site[4] = $("#addsite-modal input[name='site-ico']").val();
+                site[5] = false;
+                site[6] = true;
+                if ($(".modal").attr("modify") == "true") {
+                    var oldtypeindex = parseInt($(".modal").attr("typeindex"));
+                    var webindex = parseInt($(".modal").attr("siteindex"));
+                    site[5] = sites[oldtypeindex][webindex][5];
+                    if (site[0] !== sites[oldtypeindex][webindex][0]) {
+                        var sortstr = getCookie("sort_websits_" + oldtypeindex);
+                        sortstr = sortstr.replace(sites[oldtypeindex][webindex][0], site[0]);
+                        setCookie("sort_websits_" + oldtypeindex, sortstr);
+
+                        var favorite = getCookie("favorite");
+                        favorite = favorite.replace(sites[oldtypeindex][webindex][0], site[0]);
+                        setCookie("favorite", favorite);
+                    }
+
+                    if (oldtypeindex == typeindex) {
+                        sites[typeindex][webindex] = site;
+                    }
+                    else {
+                        sites[oldtypeindex].splice(webindex, 1);
+                        sites[typeindex].push(site);
+                    }
+                }
+                else
+                    sites[typeindex].push(site);
+                $(".modal-box.active").attr('changed', true);
+                $(".modal-close").click();
+            }
+            if (modal == "addmultiple-modal") {
+                if (name == "删除") {
+                    var oldtypeindex = parseInt($(".modal").attr("typeindex"));
+                    var webindex = parseInt($(".modal").attr("siteindex"));
+                    sites[oldtypeindex].splice(webindex, 1);
+
+                    $(".modal-box.active").attr('changed', true);
+                    $(".modal-close").click();
+                    return;
+                }
+
+                $("#addmultiple-modal span").addClass("none");
+                if ($("#addmultiple-modal input[name='multiple-name']").val() == "") {
+                    $("#multiple-name-req").removeClass("none");
+                    return;
+                }
+                var items = [];
+                if ($("#addmultiple-modal .fs-label").text() == "Select some options") {
+                    $("#multiple-sites-req").removeClass("none");
+                    return;
+                }
+                else {
+                    items = $("#addmultiple-modal .fs-label").text().split(';');
+                    if (items.length < 2 || items.length > 4) {
+                        $("#multiple-sites-req").removeClass("none");
+                        return;
+                    }
+                }
+
+
+                var typeindex = $("#addmultiple-modal .select ul li.selected").attr('typeindex');
+                var site = [];
+                site[0] = $("#addmultiple-modal input[name='multiple-name']").val();
+                site[1] = $("#addmultiple-modal input[name='multiple-memo']").val();
+                site[2] = "multiple";
+                site[3] = $("#addmultiple-modal .fs-label").text();
+                site[4] = "template" + items.length;
+                site[5] = false;
+                site[6] = true;
+                if ($(".modal").attr("modify") == "true") {
+                    var oldtypeindex = parseInt($(".modal").attr("typeindex"));
+                    var webindex = parseInt($(".modal").attr("siteindex"));
+                    site[5] = sites[oldtypeindex][webindex][5];
+                    if (site[0] !== sites[oldtypeindex][webindex][0]) {
+                        var sortstr = getCookie("sort_websits_" + oldtypeindex);
+                        sortstr = sortstr.replace(sites[oldtypeindex][webindex][0], site[0]);
+                        setCookie("sort_websits_" + oldtypeindex, sortstr);
+
+                        var favorite = getCookie("favorite");
+                        favorite = favorite.replace(sites[oldtypeindex][webindex][0], site[0]);
+                        setCookie("favorite", favorite);
+                    }
+
+                    if (oldtypeindex == typeindex) {
+                        sites[typeindex][webindex] = site;
+                    }
+                    else {
+                        sites[oldtypeindex].splice(webindex, 1);
+                        sites[typeindex].push(site);
+                    }
+                }
+                else
+                    sites[typeindex].push(site);
+                $(".modal-box.active").attr('changed', true);
+                $(".modal-close").click();
+            }
+        });
+
+        $(".modal-close").click(function (n) {
+            if ($(".modal-box.active").attr('changed') == "true") {
+                bulidtype();
+                bulidfavorites();
+                var first = $('#cur_subtype li').attr("typeindex");
+                selecttabtype(first);
+                $(".modal-box.active").attr('changed', false);
+
+                //保存自定义数据
+                //分组
+                var usertypes = [];
+                for (index in types) {
+                    if (types[index].user == true)
+                        usertypes.push(types[index]);
+                }
+                //if(usertypes.length > 0){
+                setCookie("usertypes", JSON.stringify(usertypes));
+                //}
+                //站点		
+                for (index in types) {
+                    var items = sites[index];
+                    var usersites = [];
+                    for (i in items) {
+                        if (items[i][6] == true)
+                            usersites.push(items[i]);
+                    }
+                    //if(usersites.length > 0){
+                    setCookie("usersites_" + index, JSON.stringify(usersites));
+                    //}
+
+                }
+            }
+            $(".modal").attr("modify", false);
+            $(".modal").attr("typeindex", "");
+            $(".modal").attr("siteindex", "");
+
+            $(".modal").removeClass('active');
+            $(".modal").css("display", "none");
+            $(".modal-box").removeClass('active');
+            $(".modal-box").css("display", "none");
+
+        });
+
+        $(".modal").click(function (n) {
+            if ($(n.target).hasClass("modal"))
+                $(".modal-close").click();
+        });
+
+
+
+
+    </script>
+    <!--satrt输入框提示-->
+    <script>
+        $("#search-input-box input").blur(function () {
+            $("#search-keywords").removeClass("active")
+        });
+
+        $("#keywords").bind("mouseup", function (event) {
+            if ($("#search-keywords ul li")[0])
+                $("#search-keywords").addClass('active');
+        });
+        /*设置监听事件，向输入框中输入内容，当键盘按键弹起的时候，将输入的内容作为参数传入到函数info中*/
+        $("#keywords").bind("keyup", function (event) {
+            /*当键盘按下上下键的时候，不进行监听，否则会与keyup事件起冲突*/
+            if (event.keyCode == 38 || event.keyCode == 40) {
+                var index = $("#search-keywords>ul>li.over").index();
+                if (index < 0)
+                    index = 0;
+                else {
+                    if (event.keyCode == 40) {
+                        index++;
+                        if (index >= $("#search-keywords ul li").length)
+                            index = 0;
+                    }
+                    else {
+                        index--;
+                        if (index < 0)
+                            index = $("#search-keywords ul li").length - 1;
+                    }
+                }
+                $("#search-keywords ul li").removeClass("over");
+                $("#search-keywords ul li").eq(index).addClass("over");
+
+                var text = $("#search-keywords ul li").eq(index).children('a').attr("data-keyword");
+                $("#search-input-box input").val(text);
+
+                return false;
+            }
+            if (event.keyCode == 13) {
+                if ($("#search-keywords").hasClass('active')) {
+                    $("#search-keywords").removeClass("active");
+                }
+                search();
+
+                return false;
+            }
+
+            var value = $("#keywords").val();
+            info(value);
+        });
+
+        /*将ajax封装到函数中*/
+        function info(value) {
+            /*百度搜索框智能提示的接口*/
+            var url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su";
+            /*需要传入的参数，cb是callback的缩写*/
+            var data = {
+                wd: value,
+                cb: "helloword"
+            }
+            /*因为涉及跨域，这里使用jsonp*/
+            $.ajax({
+                url: url,
+                data: data,
+                type: "GET",
+                dataType: "jsonp",
+                jsonpCallback: "helloword",
+                /*跨域成功的时候返回的数据*/
+                success: function (result) {
+                    /*将获取的数据整理后返回到页面*/
+                    var a = result.s;
+                    var list = "";
+                    for (var i in a) {
+                        var l = a[i];
+                        list += '<li><a href="javascript:void(0);" data-keyword="' + l + '">' + l + '</a></li>';
+                    }
+                    $("#search-keywords ul").html(list);
+                    if (list == "")
+                        $("#search-keywords").removeClass('active');
+                    else {
+                        $("#search-keywords").addClass('active');
+                        $("#search-keywords li a").click(function () {
+                            $("#search-keywords").removeClass("active");
+                            $("#search-input-box input").val($(this).attr("data-keyword"));
+                            //i($(this).attr("data-keyword"))
+                        });
+
+                        $("#search-keywords li").mouseover(function () {//鼠标滑过  
+                            $(this).addClass("over");
+                        })
+                            .mouseout(function () { //鼠标滑出  
+                                $(this).removeClass("over");
+                            })
+                    }
+
+
+
+                },
+                /*跨域失败的时候返回的数据*/
+                error: function () {
+                    console.log("error");
+                }
+            })
+        }
+    </script>
+    <!--end输入框提示-->
+
+    <script>
+        var node = document.querySelector("#cur_subtype,#websites");
+        var draging = null;
+        //使用事件委托，将li的事件委托给ul
+        node.ondragstart = function (event) {
+            //console.log("start");
+            //firefox设置了setData后元素才能拖动！！！！
+            event.dataTransfer.setData("te", event.target.innerText); //不能使用text，firefox会打开新tab
+            //event.dataTransfer.setData("self", event.target);
+            draging = event.target;
+        }
+        node.ondragover = function (event) {
+            //console.log("onDrop over");
+            event.preventDefault();
+            var target = event.target;
+            //因为dragover会发生在ul上，所以要判断是不是li
+
+            if (target.nodeName !== "LI")
+                target = target.parentNode;
+            if (draging.nodeName !== "LI")
+                draging = draging.parentNode;
+
+            if (target.parentNode !== draging.parentNode)
+                return;
+            if (target.nodeName === "LI" && draging.nodeName === "LI" && target !== draging) {
+                if (_index(draging) < _index(target)) {
+                    target.parentNode.insertBefore(draging, target.nextSibling);
+                } else {
+                    target.parentNode.insertBefore(draging, target);
+                }
+            }
+        }
+        node.ondragend = function (event) {
+            //var drag = event.target;
+            if (draging.nodeName !== "LI")
+                draging = draging.parentNode;
+
+            var target = draging.parentNode;
+            if (target.id === "cur_subtype") {
+                var sort = "";
+                var $items = $(target.children);
+                $items.each(function () {
+                    sort += ";" + $(this).children("a").text();
+                });
+                if (sort.length > 0)
+                    sort = sort.substr(1);
+                setCookie("sort_type", sort);
+            }
+            if (target.id === "websites" || target.id === "faveriters") {
+                var sort = "";
+                var $items = $(target.children);
+                $items.each(function () {
+                    sort += ";" + $(this).children("span").text();
+                });
+                if (sort.length > 0)
+                    sort = sort.substr(1);
+
+                if (target.id === "faveriters") {
+                    setCookie("favorite", sort);
+                }
+                else {
+                    var typeindex = $('#cur_subtype li.selected').attr("typeindex");
+                    setCookie("sort_websits_" + typeindex, sort);
+                }
+            }
+        }
+        //获取元素在父元素中的index
+        function _index(el) {
+            var index = 0;
+
+            if (!el || !el.parentNode) {
+                return -1;
+            }
+
+            while (el && (el = el.previousElementSibling)) {
+                //console.log(el);
+                index++;
+            }
+
+            return index;
+        }
+        var node1 = document.querySelector("#websites");
+        node1.ondragstart = node.ondragstart;
+        node1.ondragover = node.ondragover;
+        node1.ondragend = node.ondragend;
+        var node2 = document.querySelector("#faveriters");
+        node2.ondragstart = node.ondragstart;
+        node2.ondragover = node.ondragover;
+        node2.ondragend = node.ondragend;
+
+
+    </script>
+</body>
+
+</html>
